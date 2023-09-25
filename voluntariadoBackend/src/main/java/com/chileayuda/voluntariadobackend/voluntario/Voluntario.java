@@ -1,15 +1,13 @@
 package com.chileayuda.voluntariadobackend.voluntario;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "voluntario")
 public class Voluntario {
     //ATRIBUTOS
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_voluntario")
     private Long id;
 
