@@ -8,4 +8,4 @@
 
 ## TECNOLOGÍAS Y VERSIÓN
 
- El presente proyecto utiliza las tecnologías: Java (17) con su framework Spring boot Maven (2.7.9) y postgreSQL.
+ El presente proyecto utiliza las tecnologías: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
