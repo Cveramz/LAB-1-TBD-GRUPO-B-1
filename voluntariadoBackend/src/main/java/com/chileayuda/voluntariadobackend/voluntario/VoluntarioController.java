@@ -74,7 +74,4 @@ public class VoluntarioController {
     public void deleteByIdVol(@PathVariable Long id) {
         volService.deleteByIdVol(id);
     }
-
-
-
 }
