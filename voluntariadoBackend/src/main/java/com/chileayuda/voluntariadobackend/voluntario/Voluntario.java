@@ -25,15 +25,27 @@ public class Voluntario {
     @Column(name = "estado_salud")
     private Boolean estado_salud;
 
+    @Column(name = "disponibilidad")
+    private Boolean disponibilidad;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
     //CONSTRUCTORES
     public Voluntario(){}
 
-    public Voluntario(Long id, String nombre, int edad, String equipamiento, Boolean estado_salud) {
+    public Voluntario(Long id, String nombre, int edad, String equipamiento, Boolean estado_salud, Boolean disponibilidad, String email, String password) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.equipamiento = equipamiento;
         this.estado_salud = estado_salud;
+        this.disponibilidad = disponibilidad;
+        this.email = email;
+        this.password = password;
     }
 
     //GETTERS Y SETTERS
@@ -75,6 +87,30 @@ public class Voluntario {
 
     public void setEstado_salud(Boolean estado_salud) {
         this.estado_salud = estado_salud;
+    }
+
+    public Boolean getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(Boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

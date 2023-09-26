@@ -17,15 +17,21 @@ public class Institucion {
     @Column(name = "telefono")
     private int telefono;
 
+    @Column(name = "ubicacion")
+    private String ubicacion;
+
+
     //CONSTRUCTORES
     public Institucion(){}
-    public Institucion(Long id, String nombre, int telefono) {
+    public Institucion(Long id, String nombre, int telefono, String ubicacion) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
+        this.ubicacion = ubicacion;
     }
 
     //GETTERS Y SETTERS
+
     public Long getId() {
         return id;
     }
@@ -48,5 +54,13 @@ public class Institucion {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

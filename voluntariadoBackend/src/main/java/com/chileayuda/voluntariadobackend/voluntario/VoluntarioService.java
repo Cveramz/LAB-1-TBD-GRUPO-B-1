@@ -66,6 +66,9 @@ public class VoluntarioService{
             presente.setEdad(volUpdate.getEdad());
             presente.setEquipamiento(volUpdate.getEquipamiento());
             presente.setEstado_salud(volUpdate.getEstado_salud());
+            presente.setDisponibilidad(volUpdate.getDisponibilidad());
+            presente.setEmail(volUpdate.getEmail());
+            presente.setPassword(volUpdate.getPassword());
             return volRepo.save(presente);
         } else {
             return null;

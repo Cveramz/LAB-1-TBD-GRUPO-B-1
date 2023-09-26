@@ -57,8 +57,10 @@ public class InstitucionService {
     public Institucion updateInstitucion(Institucion institucionUpdate) {
         Institucion presente = institucionRepo.findById(institucionUpdate.getId()).orElse(null);
         if (presente != null) {
+            presente.setId(institucionUpdate.getId());
             presente.setNombre(institucionUpdate.getNombre());
             presente.setTelefono(institucionUpdate.getTelefono());
+            presente.setUbicacion(institucionUpdate.getUbicacion());
             return institucionRepo.save(presente);
         } else {
             return null;
