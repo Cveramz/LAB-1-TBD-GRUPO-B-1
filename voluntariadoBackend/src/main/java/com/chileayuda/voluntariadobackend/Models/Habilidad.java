@@ -1,17 +1,9 @@
-package com.chileayuda.voluntariadobackend.habilidad;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "habilidad")
 public class Habilidad {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_habilidad")
     private Long id;
-
-    @Column(name = "nombre")
     private String nombre;
 
     //CONSTRUCTORES

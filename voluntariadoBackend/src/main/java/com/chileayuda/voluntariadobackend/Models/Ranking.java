@@ -1,17 +1,9 @@
-package com.chileayuda.voluntariadobackend.ranking;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "ranking")
 public class Ranking {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_ranking")
     private Long id;
 
-    @Column(name = "lugar")
     private int lugar;
 
     //CONSTRUCTORES

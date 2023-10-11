@@ -1,37 +1,18 @@
-package com.chileayuda.voluntariadobackend.voluntario;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "voluntario")
 public class Voluntario {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_voluntario")
+
     private Long id;
 
     //AGREGAR LA FK DE RANKING
-
-    @Column(name = "nombre")
     private String nombre;
-
-    @Column(name = "edad")
     private int edad;
-
-    @Column(name = "equipamiento")
     private String equipamiento;
-
-    @Column(name = "estado_salud")
     private Boolean estado_salud;
-
-    @Column(name = "disponibilidad")
     private Boolean disponibilidad;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "password")
     private String password;
 
     //CONSTRUCTORES

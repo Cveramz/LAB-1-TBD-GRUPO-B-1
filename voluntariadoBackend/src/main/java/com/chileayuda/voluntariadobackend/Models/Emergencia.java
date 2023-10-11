@@ -1,23 +1,10 @@
-package com.chileayuda.voluntariadobackend.emergencia;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "emergencia")
 public class Emergencia {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_emergencia")
     private Long id;
-
-    @Column(name = "tipo")
     private String tipo;
-
-    @Column(name = "ubicacion")
     private String ubicacion;
-
-    @Column(name = "equipamiento_necesario")
     private String equipamiento_necesario;
 
     //CONSTRUCTORES

@@ -1,23 +1,13 @@
-package com.chileayuda.voluntariadobackend.coordinador;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "coordinador")
+
+
 public class Coordinador {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_coordinador")
     private Long id;
-
-    @Column(name = "nombre")
     private String nombre;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "password")
     private String password;
 
     //CONSTRUCTOREs

@@ -1,21 +1,12 @@
-package com.chileayuda.voluntariadobackend.tarea;
+package com.chileayuda.voluntariadobackend.Models;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "tarea")
 public class Tarea {
     //ATRIBUTOS
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_tarea")
     private Long id;
 
     //agregar ID_emergencia
 
     //agregar ID_estado_tarea
-
-    @Column(name = "nombre")
     private String nombre;
 
     //CONSTRUCTORES
