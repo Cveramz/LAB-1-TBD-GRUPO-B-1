@@ -2,36 +2,36 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Tarea {
     //ATRIBUTOS
-    private Long id;
+    private Long idTarea;
 
     //agregar ID_emergencia
 
     //agregar ID_estado_tarea
-    private String nombre;
+    private String nombreTarea;
 
     //CONSTRUCTORES
     public Tarea(){}
 
     public Tarea(Long id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+        this.idTarea = id;
+        this.nombreTarea = nombre;
     }
 
     //GETTERS Y SETTERS
 
-    public Long getId() {
+    public Long getIdTarea() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdTarea(Long id) {
+        this.idTarea = id;
     }
 
-    public String getNombre() {
+    public String getNombreTarea() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreTarea(String nombre) {
+        this.nombreTarea = nombre;
     }
 }

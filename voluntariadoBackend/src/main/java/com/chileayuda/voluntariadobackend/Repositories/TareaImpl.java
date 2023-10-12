@@ -1,18 +1,19 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Tarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
 
-@Controller
-@RequestMapping("/Tarea/")
-public class TareaController {
 
-    /* Métodos de la capa de servicios de Tarea */
+@Repository
+public class TareaRepositoryImpl implements TareaRepository {
+
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private TareaService tareaService;
+    private Sql2o sql2o;
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +24,20 @@ public class TareaController {
      * * @return - la tarea creada y guardada en la base de datos;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Tarea createTarea(@RequestBody Tarea tarea_in) {
-        return tareaService.createTarea(tarea_in);
+    @Override
+    public Tarea createTarea (Tarea tarea) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO tarea (idTarea,nombreTarea)"+
+                    "VALUES (:idTarea, :nombreTarea)";
+            connection.createQuery(sql, true)
+                    .addParameter("idTarea", tarea.getIdTarea())
+                    .addParameter("nombreTarea", tarea.getNombreTarea())
+                    .executeUpdate();
+            return tarea;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,9 +47,16 @@ public class TareaController {
      * @return - la tarea buscada;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Tarea getTareaById(@PathVariable Long id){
-        return tareaService.getTareaById(id);
+    @Override
+    public Tarea getTareaById(Long idTarea){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Tarea WHERE idTarea = :idTarea")
+                    .addParameter("idTarea", idTarea)
+                    .executeAndFetch(Tarea.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -46,9 +65,17 @@ public class TareaController {
      * @return - una lista con las tareas presentes en la BD;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
-    public List<Tarea> findAll(){
-        return tareaService.findAll();
+    @Override
+    public List<Tarea> findAllTareas(){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Tarea ORDER BY idTarea ASC")
+                    .executeAndFetch(Tarea.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+
+
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -58,9 +85,20 @@ public class TareaController {
      * @return - los datos de la tarea actualizados;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Tarea updateTarea(@RequestBody Tarea tareaUpdate) {
-        return tareaService.updateTarea(tareaUpdate);
+    @Override
+    public Tarea updateTarea(Tarea tareaUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Tarea " +
+                            "SET nombreTarea =:nombreTarea" +
+                            "WHERE idTarea =:idTarea")
+                    .addParameter("idTarea", tareaUpdate.getIdTarea())
+                    .addParameter("nombreTarea", tareaUpdate.getNombreTarea())
+                    .executeUpdate();
+            return Tarea;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -69,8 +107,14 @@ public class TareaController {
      * @param id - id de la tarea a eliminar;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteByIdTarea(@PathVariable Long id) {
-        tareaService.deleteByIdTarea(id);
+    @Override
+    public void deleteByIdTarea(Long idTarea) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Tarea WHERE idTarea =:idTarea")
+                    .addParameter("idTarea", idTarea)
+                    .executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }

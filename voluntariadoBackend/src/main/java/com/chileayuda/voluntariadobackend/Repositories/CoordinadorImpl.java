@@ -1,18 +1,19 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Coordinador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
 
-@Controller
-@RequestMapping("/Coordinador/")
-public class CoordinadorController {
 
-    /* Métodos de la capa de servicios de Coordinador */
+@Repository
+public class CoordinadorRepositoryImpl implements CoordinadorRepository {
+
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private CoordinadorService coordinadorService;
+    private Sql2o sql2o;
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +24,22 @@ public class CoordinadorController {
      * * @return - el coordinador creado y guardado en la base de datos;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Coordinador createCoordinador(@RequestBody Coordinador coordinador_in) {
-        return coordinadorService.createCoordinador(coordinador_in);
+    @Override
+    public Coordinador createCoordinador (Coordinador coordinador_in) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO coordinador_in (id,nombre,email,password)"+
+                    "VALUES (:id, :nombre, :email, :password)";
+            connection.createQuery(sql, true)
+                    .addParameter("id", coordinador_in.getId())
+                    .addParameter("nombre", coordinador_in.getNombre())
+                    .addParameter("email", coordinador_in.getEmail())
+                    .addParameter("password", coordinador_in.getPassword())
+                    .executeUpdate();
+            return coordinador_in;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,9 +49,16 @@ public class CoordinadorController {
      * @return - el coordinador buscado;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Coordinador getCoordinadorById(@PathVariable Long id){
-        return coordinadorService.getCoordinadorById(id);
+    @Override
+    public Coordinador getCoordinadorById(Long id){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Coordinador WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetch(Coordinador.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -46,9 +67,17 @@ public class CoordinadorController {
      * @return - una lista con los coordinadores presentes en la BD;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
+    @Override
     public List<Coordinador> findAll(){
-        return coordinadorService.findAll();
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Coordinador ORDER BY id ASC")
+                    .executeAndFetch(Coordinador.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+
+
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -58,9 +87,22 @@ public class CoordinadorController {
      * @return - los datos del coordinador actualizados;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Coordinador updateCoordinador(@RequestBody Coordinador coordinadorUpdate) {
-        return coordinadorService.updateCoordinador(coordinadorUpdate);
+    @Override
+    public Coordinador updateCoordinador(Coordinador coordinadorUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Coordinador " +
+                                    "SET nombre =:nombre, email =:email, password =:password" +
+                                    "WHERE id =:id")
+                    .addParameter("id", coordinador_in.getId())
+                    .addParameter("nombre", coordinador_in.getNombre())
+                    .addParameter("email", coordinador_in.getEmail())
+                    .addParameter("password", coordinador_in.getPassword())
+                    .executeUpdate();
+            return Coordinador;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -69,9 +111,15 @@ public class CoordinadorController {
      * @param id - id del coordinador a eliminar;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteByIdCoordinador(@PathVariable Long id) {
-        coordinadorService.deleteByIdCoordinador(id);
+    @Override
+    public void deleteByIdCoordinador(Long id) {
+       try(Connection connection = sql2o.open()) {
+           connection.createQuery("DELETE FROM Coordinador WHERE id =:id")
+                   .addParameter("id", id)
+                   .executeUpdate();
+       } catch (Exception exception) {
+           System.out.println(exception.getMessage());
+       }
     }
 }
 

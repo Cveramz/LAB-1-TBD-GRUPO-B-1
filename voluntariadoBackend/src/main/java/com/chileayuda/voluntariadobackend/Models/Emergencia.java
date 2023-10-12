@@ -2,7 +2,7 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Emergencia {
     //ATRIBUTOS
-    private Long id;
+    private Long idEmergencia;
     private String tipo;
     private String ubicacion;
     private String equipamiento_necesario;
@@ -11,19 +11,19 @@ public class Emergencia {
     public Emergencia(){}
 
     public Emergencia(Long id, String tipo, String ubicacion, String equipamiento_necesario) {
-        this.id = id;
+        this.idEmergencia = id;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.equipamiento_necesario = equipamiento_necesario;
     }
 
     //GETTERS Y SETTERS
-    public Long getId() {
+    public Long getIdEmergencia() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEmergencia(Long id) {
+        this.idEmergencia = id;
     }
 
     public String getTipo() {

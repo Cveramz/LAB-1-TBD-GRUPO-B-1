@@ -2,31 +2,22 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Ranking {
     //ATRIBUTOS
-    private Long id;
+    private Long idRanking;
 
-    private int lugar;
 
     //CONSTRUCTORES
     public Ranking(){}
-    public Ranking(Long id, int lugar) {
-        this.id = id;
-        this.lugar = lugar;
+    public Ranking(Long id) {
+        this.idRanking = id;
     }
 
     //GETTERS Y SETTERS
-    public Long getId() {
+    public Long getIdRanking() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdRanking(Long id) {
+        this.idRanking = id;
     }
 
-    public int getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(int lugar) {
-        this.lugar = lugar;
-    }
 }

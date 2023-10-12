@@ -1,18 +1,17 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Emergencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
+@Repository
+public class EmergenciaRepositoryImpl implements EmergenciaRepository {
 
-@Controller
-@RequestMapping("/Emergencia/")
-public class EmergenciaController {
-
-    /* Métodos de la capa de servicios de Emergencia */
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private EmergenciaService emergenciaService;
+    private Sql2o sql2o;
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +22,22 @@ public class EmergenciaController {
      * * @return - la emergencia creada y guardada en la base de datos;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Emergencia createEmergencia(@RequestBody Emergencia emergencia_in) {
-        return emergenciaService.createEmergencia(emergencia_in);
+    @Override
+    public Emergencia createEmergencia (Emergencia emergencia_in) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO emergencia_in (idEmergencia,tipo,ubicacion,equipamiento_necesario)" +
+                    "VALUES (:idEmergencia, :tipo, :ubicacion, :equipamiento_necesario)";
+            connection.createQuery(sql, true)
+                    .addParameter("idEmergencia", emergencia_in.getIdEmergencia())
+                    .addParameter("tipo", emergencia_in.getTipo())
+                    .addParameter("ubicacion", emergencia_in.getUbicacion())
+                    .addParameter("equipamiento_necesario", emergencia_in.getEquipamiento_necesario())
+                    .executeUpdate();
+            return coordinador_in;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,9 +47,17 @@ public class EmergenciaController {
      * @return - la emergencia buscada;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Emergencia getEmergenciaById(@PathVariable Long id){
-        return emergenciaService.getEmergenciaById(id);
+
+    @Override
+    public Emergecia getEmergenciaById(Long idEmergencia){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Emergencia WHERE idEmergencia = :idEmergencia")
+                    .addParameter("idEmergencia", idEmergencia)
+                    .executeAndFetch(Emergencia.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -46,9 +66,17 @@ public class EmergenciaController {
      * @return - una lista con las emergencias presentes en la BD;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
-    public List<Emergencia> findAll(){
-        return emergenciaService.findAll();
+    @Override
+    public List<Emergencia> findAllEmergency(){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Emergencia ORDER BY idEmergencia ASC")
+                    .executeAndFetch(Emergencia.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+
+
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -58,9 +86,22 @@ public class EmergenciaController {
      * @return - los datos de la emergencia actualizados;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Emergencia updateEmergencia(@RequestBody Emergencia emergenciaUpdate) {
-        return emergenciaService.updateEmergencia(emergenciaUpdate);
+    @Override
+    public Emergencia updateEmergencia(Emergencia emergenciaUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Emergencia " +
+                            "SET tipo =:tipo, ubicacion =:ubicacion, equipamiento_necesario =:equipamiento_necesario" +
+                            "WHERE idEmergencia =:idEmergencia")
+                    .addParameter("idEmergencia", emergenciaUpdate.getIdEmergencia())
+                    .addParameter("tipo", emergenciaUpdate.getTipo())
+                    .addParameter("emergencia", emergenciaUpdate.getUbicacion())
+                    .addParameter("equipamiento_necesario", emergenciaUpdate.getEquipamiento_necesario())
+                    .executeUpdate();
+            return Emergencia;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -69,9 +110,15 @@ public class EmergenciaController {
      * @param id - id de la emergencia a eliminar;
      *
     --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteByIdEmergencia(@PathVariable Long id) {
-        emergenciaService.deleteByIdEmergencia(id);
+    @Override
+    public void deleteByIdEmergencia(Long idEmergencia) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Emergencia WHERE idEmergencia =:idEmergencia")
+                    .addParameter("idEmergencia", idEmergencia)
+                    .executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
 

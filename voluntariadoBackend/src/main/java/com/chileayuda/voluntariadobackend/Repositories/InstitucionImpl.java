@@ -1,18 +1,20 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Institucion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
 
-@Controller
-@RequestMapping("/Institucion/")
-public class InstitucionController {
 
-    /* metodos de la capa de servicios de la institucion */
+@Repository
+public class InstitucionRepositoryImpl implements InstitucionRepository {
+
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private InstitucionService institucionService;
+    private Sql2o sql2o;
+
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +25,22 @@ public class InstitucionController {
      * @return - la institución creada y guardada en la base de datos;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Institucion createInstitucion(@RequestBody Institucion institucion) {
-        return institucionService.createInstitucion(institucion);
+    @Override
+    public Institucion createInstitucion (Institucion institucion) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO institucion (idInstitucion,nombreInstitucion,telefono,ubicacionInstitucion)"+
+                    "VALUES (:idInstitucion, :nombreInstitucion, :telefono, :ubicacionInstitucion)";
+            connection.createQuery(sql, true)
+                    .addParameter("idInstitucion", institucion.getIdInstitucion())
+                    .addParameter("nombreInstitucion", institucion.getNombreInstitucion())
+                    .addParameter("telefono", institucion.getTelefono())
+                    .addParameter("ubicacionInstitucion", institucion.getUbicacionInstitucion())
+                    .executeUpdate();
+            return institucion;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,22 +50,33 @@ public class InstitucionController {
      * @return - la institución buscada;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Institucion getInstitucionById(@PathVariable Long id) {
-        return institucionService.getInstitucionById(id);
+    @Override
+    public Institucion getInstitucionById(Long idInstitucion){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Institucion WHERE idInstitucion = :idInstitucion")
+                    .addParameter("idInstitucion", idInstitucion)
+                    .executeAndFetch(Institucion.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
-
     /*--------------------------------------------------------------------------------------------------------
      * findAllInstituciones: método que obtiene todas las instituciones de la BD;
      *
      * @return - una lista con las instituciones presentes en la BD;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
-    public List<Institucion> findAllInstituciones() {
-        return institucionService.findAllInstituciones();
+    @Override
+    public List<Institucion> findAllInstituciones(){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Institucion ORDER BY idInstitucion ASC")
+                    .executeAndFetch(Institucion.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
-
     /*--------------------------------------------------------------------------------------------------------
      * updateInstitucion: método que actualiza los datos de una institución en la BD;
      *
@@ -58,20 +84,38 @@ public class InstitucionController {
      * @return - los datos de la institución actualizados;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Institucion updateInstitucion(@RequestBody Institucion institucionUpdate) {
-        return institucionService.updateInstitucion(institucionUpdate);
+    @Override
+    public Institucion updateInstitucion(Institucion institucionUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Institucion " +
+                            "SET nombreInstitucion =:nombreInstitucion, telefono =:telefono, ubicacionInstitucion =:ubicacionInstitucion" +
+                            "WHERE idInstitucion =:idInstitucion")
+                    .addParameter("idInstitucion", institucionUpdate.getIdInstitucion())
+                    .addParameter("nombreInstitucion", institucionUpdate.getNombreInstitucion())
+                    .addParameter("telefono", institucionUpdate.getTelefono())
+                    .addParameter("ubicacionInstitucion", institucionUpdate.getUbicacionInstitucion())
+                    .executeUpdate();
+            return Institucion;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
-
     /*--------------------------------------------------------------------------------------------------------
      * deleteInstitucionById: método que borra una institución de la BD;
      *
      * @param id - id de la institución a eliminar;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteInstitucionById(@PathVariable Long id) {
-        institucionService.deleteInstitucionById(id);
+    @Override
+    public void deleteByIdInstitucion (Long idInstitucion) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Institucion WHERE idInstitucion =:idInstitucion")
+                    .addParameter("idInstitucion", idInstitucion)
+                    .executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
 

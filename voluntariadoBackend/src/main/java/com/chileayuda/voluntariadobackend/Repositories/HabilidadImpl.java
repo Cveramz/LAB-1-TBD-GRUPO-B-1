@@ -1,18 +1,19 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Habilidad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
 
-@Controller
-@RequestMapping("/Habilidad/")
-public class HabilidadController {
 
-    /* metodos de la capa de servicios de la habilidad */
+@Repository
+public class HabilidadRepositoryImpl implements HabilidadRepository {
+
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private HabilidadService habilidadService;
+    private Sql2o sql2o;
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +24,20 @@ public class HabilidadController {
      * @return - la habilidad creada y guardada en la base de datos;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Habilidad createHabilidad(@RequestBody Habilidad habilidad) {
-        return habilidadService.createHabilidad(habilidad);
+    @Override
+    public Habilidad createHabilidad (Habilidad habilidad) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO habilidad (idHabilidad,nombreHabilidad)"+
+                    "VALUES (:idHabilidad, :nombreHabilidad)";
+            connection.createQuery(sql, true)
+                    .addParameter("idHabilidad", habilidad.getIdHabilidad())
+                    .addParameter("nombreHabilidad", habilidad.getNombreHabilidad())
+                    .executeUpdate();
+            return habilidad;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,9 +47,16 @@ public class HabilidadController {
      * @return - la habilidad buscada;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Habilidad getHabilidadById(@PathVariable Long id) {
-        return habilidadService.getHabilidadById(id);
+    @Override
+    public Habilidad getHabilidadById(Long idHabilidad){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Habilidad WHERE idHabilidad = :idHabilidad")
+                    .addParameter("idHabilidad", idHabilidad)
+                    .executeAndFetch(Habilidad.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -46,9 +65,15 @@ public class HabilidadController {
      * @return - una lista con las habilidades presentes en la BD;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
-    public List<Habilidad> findAllHabilidades() {
-        return habilidadService.findAllHabilidades();
+    @Override
+    public List<Habilidad> findAllHabilidades(){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Habilidad ORDER BY idHabilidad ASC")
+                    .executeAndFetch(Habilidad.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -58,9 +83,20 @@ public class HabilidadController {
      * @return - los datos de la habilidad actualizados;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Habilidad updateHabilidad(@RequestBody Habilidad habilidadUpdate) {
-        return habilidadService.updateHabilidad(habilidadUpdate);
+    @Override
+    public Habilidad updateHabilidad(Habilidad habilidadUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Habilidad " +
+                            "SET nombreHabilidad =:nombreHabilidad" +
+                            "WHERE idHabilidad =:idHabilidad")
+                    .addParameter("idHabilidad", habilidadUpdate.getIdHabilidad())
+                    .addParameter("nombreHabilidad", habilidadUpdate.getNombreHabilidad())
+                    .executeUpdate();
+            return Habilidad;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -69,9 +105,15 @@ public class HabilidadController {
      * @param id - id de la habilidad a eliminar;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteHabilidadById(@PathVariable Long id) {
-        habilidadService.deleteHabilidadById(id);
+    @Override
+    public void deleteByIdHabilidad(Long idHabilidad) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Habilidad WHERE idHabilidad =:idHabilidad")
+                    .addParameter("idHabilidad", idHabilidad)
+                    .executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
 

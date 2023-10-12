@@ -1,18 +1,19 @@
 package com.chileayuda.voluntariadobackend.Repositories;
 
+import com.chileayuda.voluntariadobackend.Models.Ranking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.*;
-
+import org.sql2o.Connection;
+import org.sql2o.Sql2o;
 import java.util.List;
 
-@Controller
-@RequestMapping("/Ranking/")
-public class RankingController {
 
-    /* metodos de la capa de servicios de la ranking */
+@Repository
+public class RankingRepositoryImpl implements RankingRepository {
+
+    /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
-    private RankingService rankingService;
+    private Sql2o sql2o;
 
     /* API endpoints - operaciones CRUD */
 
@@ -23,9 +24,19 @@ public class RankingController {
      * @return - el ranking creado y guardado en la base de datos;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PostMapping
-    public Ranking createRanking(@RequestBody Ranking ranking) {
-        return rankingService.createRanking(ranking);
+    @Override
+    public Ranking createRanking (Ranking ranking) {
+        try (Connection connection = sql2o.open()) {
+            String sql = "INSERT TO ranking (idRanking)"+
+                    "VALUES (:idRanking)";
+            connection.createQuery(sql, true)
+                    .addParameter("idRanking", ranking.getIdRanking())
+                    .executeUpdate();
+            return ranking;
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -35,9 +46,16 @@ public class RankingController {
      * @return - el ranking buscado;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping("/{id}")
-    public Ranking getRankingById(@PathVariable Long id) {
-        return rankingService.getRankingById(id);
+    @Override
+    public Ranking getRankingById(Long idRanking){
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Ranking WHERE idRanking = :idRanking")
+                    .addParameter("idRanking", idRanking)
+                    .executeAndFetch(Ranking.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -46,9 +64,17 @@ public class RankingController {
      * @return - una lista con los rankings presentes en la BD;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @GetMapping
-    public List<Ranking> findAllRankings() {
-        return rankingService.findAllRankings();
+    @Override
+    public List<Ranking> findAllRankings(){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM Ranking ORDER BY idRanking ASC")
+                    .executeAndFetch(Ranking.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+
+
     }
 
     /*--------------------------------------------------------------------------------------------------------
@@ -58,10 +84,7 @@ public class RankingController {
      * @return - los datos del ranking actualizados;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @PutMapping
-    public Ranking updateRanking(@RequestBody Ranking rankingUpdate) {
-        return rankingService.updateRanking(rankingUpdate);
-    }
+    ////////////////ES POSIBLE MODIFICAR EL RANKING SOLO CON SU ID????///////////////////////////////
 
     /*--------------------------------------------------------------------------------------------------------
      * deleteRankingById: método que borra un ranking de la BD;
@@ -69,9 +92,15 @@ public class RankingController {
      * @param id - id del ranking a eliminar;
      *
      --------------------------------------------------------------------------------------------------------*/
-    @DeleteMapping("/{id}")
-    public void deleteRankingById(@PathVariable Long id) {
-        rankingService.deleteRankingById(id);
+    @Override
+    public void deleteByIdRanking(Long idRanking) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Ranking WHERE idRanking =:idRanking")
+                    .addParameter("idRanking", idRanking)
+                    .executeUpdate();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }
 
