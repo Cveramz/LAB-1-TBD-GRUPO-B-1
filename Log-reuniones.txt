@@ -17,3 +17,18 @@ NOTAS DE REUNIÓN:
    bastar para definir el lugar de cada Voluntario. 
 
 5) Se agregó el atributo "ubicación" a la entidad INSTITUCION.
+
+12/10/23 - 20:00hrs;
+
+Notas de la reunión:
+1) se designaron tareas para hacer en el grupo:
+- Creación de front simple para la captura y muestra de datos
+- creación de tablas y poblarlas
+- crear algunas querys necesarias de la pauta
+- crear diagrama de arquitectura
+- completar el backend
+- actualizar MR con ranking y las FK
+
+Observaciones:
+La tabla ranking deberia tener una pk serial, FK id voluntario, y un
+atributo de puntaje, para lograr obtener los lugares.
