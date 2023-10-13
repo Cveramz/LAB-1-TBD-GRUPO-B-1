@@ -68,21 +68,21 @@ export default {
   <SideBar />
   <div class="view">
     <div class="content">
-      <h1>Mis tareas</h1>
-      <p>A continuación, se presentan las tareas creadas
+      <h1>Emergencia {nombreEmergencia}</h1>
+      <p>A continuación, se presenta los detalles de la emergencia
       </p>
       <div class="card" style="margin-top: 20px;">
         <div> 
-          <h2 style="margin-bottom: 10px;"> Tareas:</h2>
+          <h2 style="margin-bottom: 10px;"></h2>
           <div v-if="this.tasks.length === 0">
-            <div>aún no hay ninguna tarea</div>
+            <div>no hay datos de la emergencia</div>
           </div>
           <div v-else>
             <table>
             <tr>
-              <th>Tarea</th>
-              <th>Estado</th>
-              <th>Vencimiento</th>
+              <th>Estado actual</th>
+              <th>voluntarios registrados</th>
+              <th>detalles</th>
             </tr>
             <tr v-for="task in tasks">
               <td>{{ task.titulo }}</td>
@@ -92,15 +92,6 @@ export default {
             </table>
           </div>
          
-        </div>
-        <div class="input">
-          <h2 style="margin: 10px 0px 10px 0px;">Agregar Tarea:</h2>
-          <div style="display: flex">
-            <input class="description" maxlength=30 v-model="descripcion" placeholder="Ingrese tarea" />
-            <input class="date" type="date" style="width: 50px; height: 46px;" v-model="date" placeholder=""/>
-            <button class="sessionButton" style="width: 50px; height: 50px; border-radius: 0px 6px 6px 0px;" @click="crearTarea">+</button>
-          </div>
-          
         </div>
         
       </div>

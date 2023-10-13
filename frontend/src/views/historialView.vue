@@ -22,13 +22,39 @@ export default {
   <SideBar />
   <div class="view">
     <div class="content">
-      <h1>Historial</h1>
-      <p>A continuación, se presenta un historial de las tareas
+      <h1>Emergencias Finalizadas</h1>
+      <p>A continuación, se presenta un historial de las emergencias finalizadas
       </p>
       <div class="card" style="margin-top: 20px;">
         <div> 
-          <h2 style="margin-bottom: 10px;"> Tareas:</h2>
-          <div>aún no hay ninguna tarea</div>
+          <table style="width: 100%">
+            <thead>
+              <tr>
+                <th class="tableRow">
+                  Nombre Emergencia
+                </th>
+                <th class="tableRow">
+                  Tareas totales
+                </th>
+                <th class="tableRow">
+                  Voluntarios participantes
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: #999999 1px solid">
+                <td class="bodyRow">
+                  ejemplo
+                </td>
+                <td class="bodyRow">
+                  ejemplo
+                </td>
+                <td class="bodyRow">
+                  ejemplo
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>        
       </div>
     </div>
@@ -84,6 +110,21 @@ h2 {
   max-width: 400px;
   border-radius: 6px;
 }
+
+.tableRow {
+  border-bottom: #d4d4d4 1px solid !important;
+  text-align: left;
+  font-weight: 600;
+  color: #0288D1;
+  height: 40px;
+}
+
+.bodyRow {
+  border-bottom: #d4d4d4 1px solid !important;
+  text-align: left;
+  height: 40px;
+}
+
 .description {
   box-sizing: border-box;
   background-color: #fafafa;
