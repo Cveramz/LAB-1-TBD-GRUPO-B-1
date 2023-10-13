@@ -70,7 +70,7 @@ CREATE TABLE voluntario(
 CREATE TABLE ranking(
     id_ranking SERIAL PRIMARY KEY,
     id_voluntario BIGINT REFERENCES voluntario(id_voluntario),
-    id_emergencia BIGINT REFERENCES emergencia(id_emergencia),
+    id_tarea BIGINT REFERENCES tarea(id_tarea),
     puntos_requisito INT
 );
 
