@@ -5,51 +5,47 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Coordinador {
     //ATRIBUTOS
-    private Long id;
-    private String nombre;
-    private String email;
-    private String password;
+    private Integer id_coordinador;
+    private String nombre_coordinador;
+    private String email_coordinador;
+    private String password_coordinador;
 
-    //CONSTRUCTOREs
-    public Coordinador(){}
-
-    public Coordinador(Long id, String nombre, String email, String password) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
+    public Coordinador(Integer id_coordinador, String nombre_coordinador, String email, String password) {
+        this.id_coordinador = id_coordinador;
+        this.nombre_coordinador = nombre_coordinador;
+        this.email_coordinador = email;
+        this.password_coordinador = password;
     }
 
-    //GETTERS Y SETTERS
-    public Long getId() {
-        return id;
+    public Integer getId_coordinador() {
+        return id_coordinador;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_coordinador(Integer id_coordinador) {
+        this.id_coordinador = id_coordinador;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre_coordinador() {
+        return nombre_coordinador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre_coordinador(String nombre_coordinador) {
+        this.nombre_coordinador = nombre_coordinador;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail_coordinador() {
+        return email_coordinador;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail_coordinador(String email) {
+        this.email_coordinador = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword_coordinador() {
+        return password_coordinador;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword_coordinador(String password) {
+        this.password_coordinador = password;
     }
 }

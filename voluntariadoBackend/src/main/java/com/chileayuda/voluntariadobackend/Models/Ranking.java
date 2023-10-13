@@ -2,44 +2,40 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Ranking {
     //ATRIBUTOS
-    private Long idRanking;
-    private Integer idVoluntario;
-    private Integer idTarea;
+    private Integer id_ranking;
+    private Integer id_voluntario;
+    private Integer id_tarea;
     private int puntos_requisito;
 
-
-    //CONSTRUCTORES
-    public Ranking(){}
-    public Ranking(Long id, Integer idVoluntario, Integer idTarea, int puntos_requisito) {
-        this.idRanking = id;
-        this.idVoluntario = idVoluntario;
-        this.idTarea = idTarea;
+    public Ranking(Integer id_ranking, Integer id_voluntario, Integer id_tarea, int puntos_requisito) {
+        this.id_ranking = id_ranking;
+        this.id_voluntario = id_voluntario;
+        this.id_tarea = id_tarea;
         this.puntos_requisito = puntos_requisito;
     }
 
-    //GETTERS Y SETTERS
-    public Long getIdRanking() {
-        return id;
+    public Integer getId_ranking() {
+        return id_ranking;
     }
 
-    public void setIdRanking(Long id) {
-        this.idRanking = id;
+    public void setId_ranking(Integer id_ranking) {
+        this.id_ranking = id_ranking;
     }
 
-    public Integer getIdVoluntario() {
-        return idVoluntario;
+    public Integer getId_voluntario() {
+        return id_voluntario;
     }
 
-    public void setIdVoluntario(Integer idVoluntario) {
-        this.idVoluntario = idVoluntario;
+    public void setId_voluntario(Integer id_voluntario) {
+        this.id_voluntario = id_voluntario;
     }
 
-    public Integer getIdTarea() {
-        return idTarea;
+    public Integer getId_tarea() {
+        return id_tarea;
     }
 
-    public void setIdTarea(Integer idTarea) {
-        this.idTarea = idTarea;
+    public void setId_tarea(Integer id_tarea) {
+        this.id_tarea = id_tarea;
     }
 
     public int getPuntos_requisito() {

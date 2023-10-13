@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class InstitucionRepositoryImpl implements InstitucionRepository {
+public class InstitucionImpl implements InstitucionRepository {
 
     /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
@@ -24,7 +24,7 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
      * @param institucion - un objeto que contiene los datos de la institución;
      * @return - la institución creada y guardada en la base de datos;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -------------------------------------------------------------------------------------------------------
     @Override
     public Institucion createInstitucion (Institucion institucion) {
         try (Connection connection = sql2o.open()) {
@@ -43,14 +43,14 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
             return null;
         }
     }
-
+-*/
     /*--------------------------------------------------------------------------------------------------------
      * getInstitucionById: método que obtiene una institución específica de la BD con su id;
      *
      * @param id - id de la institución;
      * @return - la institución buscada;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public Institucion getInstitucionById(Long idInstitucion){
         try (Connection connection = sql2o.open()) {
@@ -61,13 +61,13 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
             System.out.println(exception.getMessage());
             return null;
         }
-    }
+    }---*/
     /*--------------------------------------------------------------------------------------------------------
      * findAllInstituciones: método que obtiene todas las instituciones de la BD;
      *
      * @return - una lista con las instituciones presentes en la BD;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public List<Institucion> findAllInstituciones(){
         try(Connection connection = sql2o.open()){
@@ -77,14 +77,14 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
             System.out.println(exception.getMessage());
             return null;
         }
-    }
+    }---*/
     /*--------------------------------------------------------------------------------------------------------
      * updateInstitucion: método que actualiza los datos de una institución en la BD;
      *
      * @param institucionUpdate - el objeto con el id de la institución y los nuevos datos;
      * @return - los datos de la institución actualizados;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     ------------------------------------------------------------------------------------------------------
     @Override
     public Institucion updateInstitucion(Institucion institucionUpdate) {
         try(Connection connection = sql2o.open()) {
@@ -102,13 +102,13 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
             System.out.println(exception.getMessage());
             return null;
         }
-    }
+    }--*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteInstitucionById: método que borra una institución de la BD;
      *
      * @param id - id de la institución a eliminar;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     ----------------------------------------------------------------------------------------------------
     @Override
     public void deleteByIdInstitucion (Long idInstitucion) {
         try(Connection connection = sql2o.open()) {
@@ -118,6 +118,6 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-    }
+    }----*/
 }
 

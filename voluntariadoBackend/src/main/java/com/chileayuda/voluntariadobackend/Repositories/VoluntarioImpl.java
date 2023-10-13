@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class VoluntarioRepositoryImpl implements VoluntarioRepository {
+public class VoluntarioImpl implements VoluntarioRepository {
 
     /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
@@ -23,7 +23,7 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
      * @param vol_in - un objeto que contiene los datos del voluntario;
      * * @return - el voluntario creado y guardado en la base de datos;
      *
-      --------------------------------------------------------------------------------------------------------*/
+      ------------------------------------------------------------------------------------------------------
     @Override
     public Voluntario createVol (Voluntario voluntario) {
         try (Connection connection = sql2o.open()) {
@@ -44,14 +44,14 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
             return null;
         }
     }
-
+--*/
     /*--------------------------------------------------------------------------------------------------------
      * getVolById: metodod que obtiene un voluntario especifico de la BD con su id;
      *
      * @param id_inst - id del voluntario;
      * @return - el voluntario buscado;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     --------------------------------------------------------------------------------------------------
     @Override
     public Voluntario getVolById(Long idVoluntario){
         try (Connection connection = sql2o.open()) {
@@ -63,13 +63,13 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
             return null;
         }
     }
-
+------*/
     /*--------------------------------------------------------------------------------------------------------
      * findAll: metodo que obtiene todos los voluntarios de la BD;
      *
      * @return - una lista con los voluntarios presentes en la BD;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     ---------------------------------------------------------------------------------------------------
     @Override
     public List<Voluntario> findAllVoluntarios(){
         try(Connection connection = sql2o.open()){
@@ -82,14 +82,14 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
 
 
     }
-
+-----*/
     /*--------------------------------------------------------------------------------------------------------
      * updateVol: metodo que actualiza los datos de un voluntario en la BD;
      *
      * @param instUpdate - el objeto con el id del voluntario y los nuevos datos;
      * @return - los datos del voluntario actualizados;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public Voluntario updateVol(Voluntario voluntarioUpdate) {
         try(Connection connection = sql2o.open()) {
@@ -111,13 +111,13 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
         }
     }
 
-
+---*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdVol: metodo que borra un voluntario de la BD;
      *
      * @param id - id del voluntario a eliminar;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public void deleteByIdVol(Long idVoluntario) {
         try(Connection connection = sql2o.open()) {
@@ -126,5 +126,5 @@ public class VoluntarioRepositoryImpl implements VoluntarioRepository {
                     .executeUpdate();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
-        }
+        }---*/
     }

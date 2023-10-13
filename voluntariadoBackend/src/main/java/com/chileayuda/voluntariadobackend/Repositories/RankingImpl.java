@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class RankingRepositoryImpl implements RankingRepository {
+public class RankingImpl implements RankingRepository {
 
     /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
@@ -23,7 +23,7 @@ public class RankingRepositoryImpl implements RankingRepository {
      * @param ranking - un objeto que contiene los datos del ranking;
      * @return - el ranking creado y guardado en la base de datos;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -------------------------------------------------------------------------------------------------------
     @Override
     public Ranking createRanking (Ranking ranking) {
         try (Connection connection = sql2o.open()) {
@@ -40,7 +40,7 @@ public class RankingRepositoryImpl implements RankingRepository {
             System.out.println(exception.getMessage());
             return null;
         }
-    }
+    }-*/
 
     /*--------------------------------------------------------------------------------------------------------
      * getRankingById: método que obtiene un ranking específico de la BD con su id;
@@ -48,7 +48,7 @@ public class RankingRepositoryImpl implements RankingRepository {
      * @param id - id del ranking;
      * @return - el ranking buscado;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     ------------------------------------------------------------------------------------------------------
     @Override
     public Ranking getRankingById(Long idRanking){
         try (Connection connection = sql2o.open()) {
@@ -60,13 +60,13 @@ public class RankingRepositoryImpl implements RankingRepository {
             return null;
         }
     }
-
+--*/
     /*--------------------------------------------------------------------------------------------------------
      * findAllRankings: método que obtiene todos los rankings de la BD;
      *
      * @return - una lista con los rankings presentes en la BD;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     ---------------------------------------------------------------------------------------------------
     @Override
     public List<Ranking> findAllRankings(){
         try(Connection connection = sql2o.open()){
@@ -79,14 +79,14 @@ public class RankingRepositoryImpl implements RankingRepository {
 
 
     }
-
+-----*/
     /*--------------------------------------------------------------------------------------------------------
      * updateRanking: método que actualiza los datos de un ranking en la BD;
      *
      * @param rankingUpdate - el objeto con el id del ranking y los nuevos datos;
      * @return - los datos del ranking actualizados;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public Ranking updateRanking(Ranking rankingUpdate) {
         try(Connection connection = sql2o.open()) {
@@ -104,13 +104,13 @@ public class RankingRepositoryImpl implements RankingRepository {
             return null;
         }
     }
-
+---*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteRankingById: método que borra un ranking de la BD;
      *
      * @param id - id del ranking a eliminar;
      *
-     --------------------------------------------------------------------------------------------------------*/
+     -----------------------------------------------------------------------------------------------------
     @Override
     public void deleteByIdRanking(Long idRanking) {
         try(Connection connection = sql2o.open()) {
@@ -120,6 +120,6 @@ public class RankingRepositoryImpl implements RankingRepository {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-    }
+    }---*/
 }
 

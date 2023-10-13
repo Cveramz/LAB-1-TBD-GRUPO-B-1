@@ -3,31 +3,27 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Habilidad {
     //ATRIBUTOS
-    private Long idHabilidad;
-    private String nombreHabilidad;
+    private Integer id_habilidad;
+    private String nombre_habilidad;
 
-    //CONSTRUCTORES
-    public Habilidad(){}
-    public Habilidad(Long id, String nombre) {
-        this.idHabilidad = id;
-        this.nombreHabilidad = nombre;
+    public Habilidad(Integer id_habilidad, String nombre_habilidad) {
+        this.id_habilidad = id_habilidad;
+        this.nombre_habilidad = nombre_habilidad;
     }
 
-    //GETTERS Y SETTERS
-
-    public Long getIdHabilidad() {
-        return id;
+    public Integer getId_habilidad() {
+        return id_habilidad;
     }
 
-    public void setIdHabilidad(Long id) {
-        this.idHabilidad = id;
+    public void setId_habilidad(Integer id_habilidad) {
+        this.id_habilidad = id_habilidad;
     }
 
-    public String getNombreHabilidad() {
-        return nombre;
+    public String getNombre_habilidad() {
+        return nombre_habilidad;
     }
 
-    public void setNombreHabilidad(String nombre) {
-        this.nombreHabilidad = nombre;
+    public void setNombre_habilidad(String nombre_habilidad) {
+        this.nombre_habilidad = nombre_habilidad;
     }
 }

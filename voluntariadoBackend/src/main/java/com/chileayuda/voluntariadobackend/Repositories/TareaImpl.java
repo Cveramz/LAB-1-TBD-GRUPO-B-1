@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class TareaRepositoryImpl implements TareaRepository {
+public class TareaImpl implements TareaRepository {
 
     /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
@@ -23,7 +23,7 @@ public class TareaRepositoryImpl implements TareaRepository {
      * @param tarea_in - un objeto que contiene los datos de la tarea;
      * * @return - la tarea creada y guardada en la base de datos;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    -----------------------------------------------------------------------------------------------------
     @Override
     public Tarea createTarea (Tarea tarea) {
         try (Connection connection = sql2o.open()) {
@@ -41,14 +41,14 @@ public class TareaRepositoryImpl implements TareaRepository {
             return null;
         }
     }
-
+---*/
     /*--------------------------------------------------------------------------------------------------------
      * getTareaById: método que obtiene una tarea específica de la BD con su id;
      *
      * @param id - id de la tarea;
      * @return - la tarea buscada;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------------------------------
     @Override
     public Tarea getTareaById(Long idTarea){
         try (Connection connection = sql2o.open()) {
@@ -60,13 +60,13 @@ public class TareaRepositoryImpl implements TareaRepository {
             return null;
         }
     }
-
+--------*/
     /*--------------------------------------------------------------------------------------------------------
      * findAll: método que obtiene todas las tareas de la BD;
      *
      * @return - una lista con las tareas presentes en la BD;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------------------------------
     @Override
     public List<Tarea> findAllTareas(){
         try(Connection connection = sql2o.open()){
@@ -79,14 +79,14 @@ public class TareaRepositoryImpl implements TareaRepository {
 
 
     }
-
+--------*/
     /*--------------------------------------------------------------------------------------------------------
      * updateTarea: método que actualiza los datos de una tarea en la BD;
      *
      * @param tareaUpdate - el objeto con el id de la tarea y los nuevos datos;
      * @return - los datos de la tarea actualizados;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------------------------------
     @Override
     public Tarea updateTarea(Tarea tareaUpdate) {
         try(Connection connection = sql2o.open()) {
@@ -104,13 +104,13 @@ public class TareaRepositoryImpl implements TareaRepository {
             return null;
         }
     }
-
+--------*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdTarea: método que borra una tarea de la BD;
      *
      * @param id - id de la tarea a eliminar;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ---------------------------------------------------------------------------------------------------
     @Override
     public void deleteByIdTarea(Long idTarea) {
         try(Connection connection = sql2o.open()) {
@@ -120,5 +120,5 @@ public class TareaRepositoryImpl implements TareaRepository {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-    }
+    }-----*/
 }

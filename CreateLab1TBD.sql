@@ -4,7 +4,7 @@ USE voluntariadoTBD
 -- Tabla Habilidad
 CREATE TABLE habilidad(
     id_habilidad SERIAL PRIMARY KEY,
-    nombre VARCHAR(50)
+    nombre_habilidad VARCHAR(50)
 );
 
 -- Tabla Estado_tarea
@@ -16,18 +16,18 @@ CREATE TABLE estado_tarea(
 -- Tabla Coordinador
 CREATE TABLE coordinador(
     id_coordinador SERIAL PRIMARY KEY,
-    nombre VARCHAR(50),
-    email VARCHAR(50),
-    password VARCHAR(50)
+    nombre_coordinador VARCHAR(50),
+    email_coordinador VARCHAR(50),
+    password_coordinador VARCHAR(50)
 );
 
 -- Tabla Institución
 CREATE TABLE institucion(
     id_institucion SERIAL PRIMARY KEY,
     id_coordinador BIGINT REFERENCES coordinador(id_coordinador),
-    nombre VARCHAR(100),
+    nombre_institucion VARCHAR(100),
     telefono INT,
-    ubicacion VARCHAR(50)
+    ubicacion_institucion VARCHAR(50)
 );
 
 -- Tabla Emergencia
@@ -51,19 +51,19 @@ CREATE TABLE tarea(
     id_tarea SERIAL PRIMARY KEY,
     id_emergencia BIGINT REFERENCES emergencia(id_emergencia),
     id_estado_tarea BIGINT REFERENCES estado_tarea(id_estado_tarea),
-    nombre VARCHAR(50)
+    nombre_tarea VARCHAR(50)
 );
 
 -- Tabla Voluntario
 CREATE TABLE voluntario(
     id_voluntario SERIAL PRIMARY KEY,
-    nombre VARCHAR(50),
+    nombre_voluntario VARCHAR(50),
     edad INT,
     equipamiento VARCHAR(100),
     estado_salud BOOLEAN,
     disponibilidad BOOLEAN,
-    email VARCHAR(50),
-    password VARCHAR(50)
+    email_voluntario VARCHAR(50),
+    password_voluntario VARCHAR(50)
 );
 
 -- Tabla Ranking

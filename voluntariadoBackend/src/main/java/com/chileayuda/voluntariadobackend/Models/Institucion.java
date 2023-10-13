@@ -4,41 +4,34 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Institucion {
     //ATRIBUTOS
-    private Long idInstitucion;
-    private String nombreInstitucion;
+    private Integer id_institucion;
+    private String nombre_institucion;
     private int telefono;
-    private String ubicacionInstitucion;
+    private String ubicacion_institucion;
+    private Integer id_coordinador;
 
-    private Integer idCoordinador;
-
-
-    //CONSTRUCTORES
-    public Institucion(){}
-    public Institucion(Long id, Integer idCoordinador, String nombre, int telefono, String ubicacion ) {
-        this.idInstitucion = id;
-        this.idCoordinador = idCoordinador;
-        this.nombreInstitucion = nombre;
+    public Institucion(Integer id_institucion, String nombre_institucion, int telefono, String ubicacion_institucion, Integer id_coordinador) {
+        this.id_institucion = id_institucion;
+        this.nombre_institucion = nombre_institucion;
         this.telefono = telefono;
-        this.ubicacionInstitucion = ubicacion;
-
+        this.ubicacion_institucion = ubicacion_institucion;
+        this.id_coordinador = id_coordinador;
     }
 
-    //GETTERS Y SETTERS
-
-    public Long getIdInstitucion() {
-        return id;
+    public Integer getId_institucion() {
+        return id_institucion;
     }
 
-    public void setIdInstitucion(Long id) {
-        this.idInstitucion = id;
+    public void setId_institucion(Integer id_institucion) {
+        this.id_institucion = id_institucion;
     }
 
-    public String getNombreInstitucion() {
-        return nombre;
+    public String getNombre_institucion() {
+        return nombre_institucion;
     }
 
-    public void setNombreInstitucion(String nombre) {
-        this.nombreInstitucion = nombre;
+    public void setNombre_institucion(String nombre_institucion) {
+        this.nombre_institucion = nombre_institucion;
     }
 
     public int getTelefono() {
@@ -49,19 +42,19 @@ public class Institucion {
         this.telefono = telefono;
     }
 
-    public String getUbicacionInstitucion() {
-        return ubicacion;
+    public String getUbicacion_institucion() {
+        return ubicacion_institucion;
     }
 
-    public void setUbicacionInstitucion(String ubicacion) {
-        this.ubicacionInstitucion = ubicacion;
+    public void setUbicacion_institucion(String ubicacion_institucion) {
+        this.ubicacion_institucion = ubicacion_institucion;
     }
 
-    public Integer getIdCoordinador() {
-        return idCoordinador;
+    public Integer getId_coordinador() {
+        return id_coordinador;
     }
 
-    public void setIdCoordinador(Integer idCoordinador) {
-        this.idCoordinador = idCoordinador;
+    public void setId_coordinador(Integer id_coordinador) {
+        this.id_coordinador = id_coordinador;
     }
 }

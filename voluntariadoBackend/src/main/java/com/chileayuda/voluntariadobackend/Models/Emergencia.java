@@ -2,18 +2,18 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Emergencia {
     //ATRIBUTOS
-    private Long idEmergencia;
+    private Integer id_emergencia;
     private String tipo;
     private String ubicacion;
     private String equipamiento_necesario;
-    private Integer idInstitucion;
+    private Integer id_institucion;
 
     //CONSTRUCTORES
     public Emergencia(){}
 
-    public Emergencia(Long id, Integer idInstitucion, String tipo, String ubicacion, String equipamiento_necesario ) {
-        this.idEmergencia = id;
-        this.idInstitucion = idInstitucion;
+    public Emergencia(Integer id, Integer idInstitucion, String tipo, String ubicacion, String equipamiento_necesario ) {
+        this.id_emergencia = id;
+        this.id_institucion = idInstitucion;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.equipamiento_necesario = equipamiento_necesario;
@@ -21,12 +21,12 @@ public class Emergencia {
     }
 
     //GETTERS Y SETTERS
-    public Long getIdEmergencia() {
-        return id;
+    public Integer getIdEmergencia() {
+        return id_emergencia;
     }
 
-    public void setIdEmergencia(Long id) {
-        this.idEmergencia = id;
+    public void setIdEmergencia(Integer id) {
+        this.id_emergencia = id;
     }
 
     public String getTipo() {
@@ -54,10 +54,10 @@ public class Emergencia {
     }
 
     public Integer getIdInstitucion() {
-        return idInstitucion;
+        return id_institucion;
     }
 
-    public void setIdInstitucion(Integer idInstitucion) {
-        this.idInstitucion = idInstitucion;
+    public void setIdInstitucion(Integer idnstitucion) {
+        this.id_institucion = id_institucion;
     }
 }

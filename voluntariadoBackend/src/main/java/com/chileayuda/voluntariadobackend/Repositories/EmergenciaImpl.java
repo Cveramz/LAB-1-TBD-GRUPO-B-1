@@ -7,7 +7,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import java.util.List;
 @Repository
-public class EmergenciaRepositoryImpl implements EmergenciaRepository {
+public class EmergenciaImpl implements EmergenciaRepository {
 
     /* Métodos de la capa de repositorio de Emergencia */
     @Autowired
@@ -21,7 +21,7 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
      * @param emergencia_in - un objeto que contiene los datos de la emergencia;
      * * @return - la emergencia creada y guardada en la base de datos;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    --------------------------------------------------------------------------------------------------------
     @Override
     public Emergencia createEmergencia (Emergencia emergencia_in) {
         try (Connection connection = sql2o.open()) {
@@ -40,14 +40,14 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
             return null;
         }
     }
-
+*/
     /*--------------------------------------------------------------------------------------------------------
      * getEmergenciaById: método que obtiene una emergencia específica de la BD con su id;
      *
      * @param id - id de la emergencia;
      * @return - la emergencia buscada;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    --------------------------------------------------------------------------------------------------------
 
     @Override
     public Emergecia getEmergenciaById(Long idEmergencia){
@@ -60,13 +60,13 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
             return null;
         }
     }
-
+*/
     /*--------------------------------------------------------------------------------------------------------
      * findAll: método que obtiene todas las emergencias de la BD;
      *
      * @return - una lista con las emergencias presentes en la BD;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    -------------------------------------------------------------------------------------------------------
     @Override
     public List<Emergencia> findAllEmergency(){
         try(Connection connection = sql2o.open()){
@@ -79,14 +79,14 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
 
 
     }
-
+-*/
     /*--------------------------------------------------------------------------------------------------------
      * updateEmergencia: método que actualiza los datos de una emergencia en la BD;
      *
      * @param emergenciaUpdate - el objeto con el id de la emergencia y los nuevos datos;
      * @return - los datos de la emergencia actualizados;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------------------------------------
     @Override
     public Emergencia updateEmergencia(Emergencia emergenciaUpdate) {
         try(Connection connection = sql2o.open()) {
@@ -105,13 +105,13 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
             return null;
         }
     }
-
+--*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdEmergencia: método que borra una emergencia de la BD;
      *
      * @param id - id de la emergencia a eliminar;
      *
-    --------------------------------------------------------------------------------------------------------*/
+    ------------------------------------------------------------------------------------------------------
     @Override
     public void deleteByIdEmergencia(Long idEmergencia) {
         try(Connection connection = sql2o.open()) {
@@ -121,6 +121,6 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
-    }
+    }--*/
 }
 

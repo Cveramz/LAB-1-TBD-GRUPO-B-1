@@ -2,52 +2,47 @@ package com.chileayuda.voluntariadobackend.Models;
 
 public class Tarea {
     //ATRIBUTOS
-    private Long idTarea;
-    private Integer idEmergencia;
-    private Integer idEstado_Tarea;
-    private String nombreTarea;
+    private Long id_tarea;
+    private Integer id_emergencia;
+    private Integer id_estado_Tarea;
+    private String nombre_tarea;
 
-    //CONSTRUCTORES
-    public Tarea(){}
-
-    public Tarea(Long id, Integer idEmergencia, Integer idEstado_Tarea, String nombre) {
-        this.idTarea = id;
-        this.idEmergencia = idEmergencia;
-        this.idEstado_Tarea = idEstado_Tarea;
-        this.nombreTarea = nombre;
+    public Tarea(Long id_tarea, Integer id_emergencia, Integer id_estado_Tarea, String nombre_tarea) {
+        this.id_tarea = id_tarea;
+        this.id_emergencia = id_emergencia;
+        this.id_estado_Tarea = id_estado_Tarea;
+        this.nombre_tarea = nombre_tarea;
     }
 
-    //GETTERS Y SETTERS
-
-    public Long getIdTarea() {
-        return id;
+    public Long getId_tarea() {
+        return id_tarea;
     }
 
-    public void setIdTarea(Long id) {
-        this.idTarea = id;
+    public void setId_tarea(Long id_tarea) {
+        this.id_tarea = id_tarea;
     }
 
-    public String getNombreTarea() {
-        return nombre;
+    public Integer getId_emergencia() {
+        return id_emergencia;
     }
 
-    public void setNombreTarea(String nombre) {
-        this.nombreTarea = nombre;
+    public void setId_emergencia(Integer id_emergencia) {
+        this.id_emergencia = id_emergencia;
     }
 
-    public Integer getIdEmergencia() {
-        return idEmergencia;
+    public Integer getId_estado_Tarea() {
+        return id_estado_Tarea;
     }
 
-    public void setIdEmergencia(Integer idEmergencia) {
-        this.idEmergencia = idEmergencia;
+    public void setId_estado_Tarea(Integer id_estado_Tarea) {
+        this.id_estado_Tarea = id_estado_Tarea;
     }
 
-    public Integer getIdEstado_Tarea() {
-        return idEstado_Tarea;
+    public String getNombre_tarea() {
+        return nombre_tarea;
     }
 
-    public void setIdEstado_Tarea(Integer idEstado_Tarea) {
-        this.idEstado_Tarea = idEstado_Tarea;
+    public void setNombre_tarea(String nombre_tarea) {
+        this.nombre_tarea = nombre_tarea;
     }
 }
