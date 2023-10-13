@@ -20,7 +20,7 @@
   <div class="topbar">
     <div style="display: flex; text-align: center; align-items: center"> 
       <img class="usachLogo" src="./media/logodgt.png"/>
-      <div class="logoTitle">TO DO <br/> APP</div>
+      <div class="logoTitle">VOLUNTARIADO <br/> USACH</div>
     </div>
     <div style="display: flex; text-align: center; align-items: center; margin: 20px">
       <div style="margin-right: 10px;">{{ this.username }}</div>

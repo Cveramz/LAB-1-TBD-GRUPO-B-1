@@ -7,7 +7,7 @@
     <div class="general">
       <div class="content">
         <img class="image" src="./media/logodgt.png"/>
-        <div class="header">TO DO APP</div>
+        <div class="header">Voluntariado Usach</div>
         <div class="headerDescription" v-if="!register">Inicie sesión para entrar al portal</div>
         <div class="headerDescription" v-else>Complete los campos para registrarse</div>
         <div class="inputContainers" v-if="!register">
@@ -134,7 +134,7 @@ export default {
 
 <style scoped>
 .general {
-  background-image: url("./media/usach.jpg"); 
+  background-image: url("./media/VolWallpaper.jpg"); 
   
   height: 100vh;
   background-repeat: no-repeat;
