@@ -19,6 +19,12 @@ const router = createRouter({
       name: 'historial',
       component: () => import('../views/historialView.vue'),
     },
+    {
+      path: '/registerEmergency',
+      name: 'registrarEmergencia',
+      component: () => import('../views/registerEmergency.vue'),
+    },
+    
   ],
 });
 
