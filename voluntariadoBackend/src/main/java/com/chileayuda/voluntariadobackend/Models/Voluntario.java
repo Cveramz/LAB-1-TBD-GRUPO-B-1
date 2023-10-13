@@ -5,8 +5,6 @@ public class Voluntario {
     //ATRIBUTOS
 
     private Long idVoluntario;
-
-    //AGREGAR LA FK DE RANKING
     private String nombreVoluntario;
     private int edad;
     private String equipamiento;

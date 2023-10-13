@@ -28,10 +28,11 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
     @Override
     public Institucion createInstitucion (Institucion institucion) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO institucion (idInstitucion,nombreInstitucion,telefono,ubicacionInstitucion)"+
-                    "VALUES (:idInstitucion, :nombreInstitucion, :telefono, :ubicacionInstitucion)";
+            String sql = "INSERT TO institucion (idInstitucion,idCoordinador, nombreInstitucion,telefono,ubicacionInstitucion)"+
+                    "VALUES (:idInstitucion, :idCoordinador,:nombreInstitucion, :telefono, :ubicacionInstitucion)";
             connection.createQuery(sql, true)
                     .addParameter("idInstitucion", institucion.getIdInstitucion())
+                    .addParameter("idCoordinador", institucion.getIdCoordinador())
                     .addParameter("nombreInstitucion", institucion.getNombreInstitucion())
                     .addParameter("telefono", institucion.getTelefono())
                     .addParameter("ubicacionInstitucion", institucion.getUbicacionInstitucion())
@@ -88,12 +89,13 @@ public class InstitucionRepositoryImpl implements InstitucionRepository {
     public Institucion updateInstitucion(Institucion institucionUpdate) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Institucion " +
-                            "SET nombreInstitucion =:nombreInstitucion, telefono =:telefono, ubicacionInstitucion =:ubicacionInstitucion" +
+                            "SET idCoordinador =:idCoordinador, nombreInstitucion =:nombreInstitucion, telefono =:telefono, ubicacionInstitucion =:ubicacionInstitucion" +
                             "WHERE idInstitucion =:idInstitucion")
-                    .addParameter("idInstitucion", institucionUpdate.getIdInstitucion())
-                    .addParameter("nombreInstitucion", institucionUpdate.getNombreInstitucion())
-                    .addParameter("telefono", institucionUpdate.getTelefono())
-                    .addParameter("ubicacionInstitucion", institucionUpdate.getUbicacionInstitucion())
+                    .addParameter("idInstitucion", institucion.getIdInstitucion())
+                    .addParameter("idCoordinador", institucion.getIdCoordinador())
+                    .addParameter("nombreInstitucion", institucion.getNombreInstitucion())
+                    .addParameter("telefono", institucion.getTelefono())
+                    .addParameter("ubicacionInstitucion", institucion.getUbicacionInstitucion())
                     .executeUpdate();
             return Institucion;
         } catch (Exception exception) {

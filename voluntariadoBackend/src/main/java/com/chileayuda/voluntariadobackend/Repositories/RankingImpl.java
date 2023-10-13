@@ -27,10 +27,13 @@ public class RankingRepositoryImpl implements RankingRepository {
     @Override
     public Ranking createRanking (Ranking ranking) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO ranking (idRanking)"+
-                    "VALUES (:idRanking)";
+            String sql = "INSERT TO ranking (idRanking, idVoluntario, idTarea, puntos_requisito)"+
+                    "VALUES (:idRanking, :idVoluntario, :idTarea, :puntos_requisito)";
             connection.createQuery(sql, true)
                     .addParameter("idRanking", ranking.getIdRanking())
+                    .addParameter("idVoluntario", ranking.getIdVoluntario())
+                    .addParameter("idTarea", ranking.getIdTarea())
+                    .addParameter("puntos_requisito", ranking.getPuntos_requisito())
                     .executeUpdate();
             return ranking;
         } catch (Exception exception){
@@ -84,7 +87,23 @@ public class RankingRepositoryImpl implements RankingRepository {
      * @return - los datos del ranking actualizados;
      *
      --------------------------------------------------------------------------------------------------------*/
-    ////////////////ES POSIBLE MODIFICAR EL RANKING SOLO CON SU ID????///////////////////////////////
+    @Override
+    public Ranking updateRanking(Ranking rankingUpdate) {
+        try(Connection connection = sql2o.open()) {
+            connection.createQuery("UPDATE Ranking " +
+                            "SET idVoluntario =:idVoluntario, idTarea =:idTarea, puntos_requisito =:puntos_requisitos" +
+                            "WHERE idRanking =:idRanking")
+                    .addParameter("idRanking", ranking.getIdRanking())
+                    .addParameter("idVoluntario", ranking.getIdVoluntario())
+                    .addParameter("idTarea", ranking.getIdTarea())
+                    .addParameter("puntos_requisito", ranking.getPuntos_requisito())
+                    .executeUpdate();
+            return Ranking;
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
 
     /*--------------------------------------------------------------------------------------------------------
      * deleteRankingById: método que borra un ranking de la BD;

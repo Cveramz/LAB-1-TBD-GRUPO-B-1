@@ -6,15 +6,18 @@ public class Emergencia {
     private String tipo;
     private String ubicacion;
     private String equipamiento_necesario;
+    private Integer idInstitucion;
 
     //CONSTRUCTORES
     public Emergencia(){}
 
-    public Emergencia(Long id, String tipo, String ubicacion, String equipamiento_necesario) {
+    public Emergencia(Long id, Integer idInstitucion, String tipo, String ubicacion, String equipamiento_necesario ) {
         this.idEmergencia = id;
+        this.idInstitucion = idInstitucion;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.equipamiento_necesario = equipamiento_necesario;
+
     }
 
     //GETTERS Y SETTERS
@@ -48,5 +51,13 @@ public class Emergencia {
 
     public void setEquipamiento_necesario(String equipamiento_necesario) {
         this.equipamiento_necesario = equipamiento_necesario;
+    }
+
+    public Integer getIdInstitucion() {
+        return idInstitucion;
+    }
+
+    public void setIdInstitucion(Integer idInstitucion) {
+        this.idInstitucion = idInstitucion;
     }
 }

@@ -25,10 +25,11 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
     @Override
     public Emergencia createEmergencia (Emergencia emergencia_in) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO emergencia_in (idEmergencia,tipo,ubicacion,equipamiento_necesario)" +
-                    "VALUES (:idEmergencia, :tipo, :ubicacion, :equipamiento_necesario)";
+            String sql = "INSERT TO emergencia_in (idEmergencia,idInstitucion, tipo,ubicacion,equipamiento_necesario)" +
+                    "VALUES (:idEmergencia, :idInstitucion, :tipo, :ubicacion, :equipamiento_necesario)";
             connection.createQuery(sql, true)
                     .addParameter("idEmergencia", emergencia_in.getIdEmergencia())
+                    .addParameter("idInstitucion", emergencia_in.getIdInstitucion())
                     .addParameter("tipo", emergencia_in.getTipo())
                     .addParameter("ubicacion", emergencia_in.getUbicacion())
                     .addParameter("equipamiento_necesario", emergencia_in.getEquipamiento_necesario())
@@ -90,9 +91,10 @@ public class EmergenciaRepositoryImpl implements EmergenciaRepository {
     public Emergencia updateEmergencia(Emergencia emergenciaUpdate) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Emergencia " +
-                            "SET tipo =:tipo, ubicacion =:ubicacion, equipamiento_necesario =:equipamiento_necesario" +
+                            "SET idInstitucion =:idInstitucion, tipo =:tipo, ubicacion =:ubicacion, equipamiento_necesario =:equipamiento_necesario" +
                             "WHERE idEmergencia =:idEmergencia")
                     .addParameter("idEmergencia", emergenciaUpdate.getIdEmergencia())
+                    .addParameter("idInstitucion", emergenciaUpdate.getIdInstitucion())
                     .addParameter("tipo", emergenciaUpdate.getTipo())
                     .addParameter("emergencia", emergenciaUpdate.getUbicacion())
                     .addParameter("equipamiento_necesario", emergenciaUpdate.getEquipamiento_necesario())

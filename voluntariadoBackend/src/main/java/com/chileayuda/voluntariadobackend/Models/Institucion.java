@@ -9,14 +9,18 @@ public class Institucion {
     private int telefono;
     private String ubicacionInstitucion;
 
+    private Integer idCoordinador;
+
 
     //CONSTRUCTORES
     public Institucion(){}
-    public Institucion(Long id, String nombre, int telefono, String ubicacion) {
+    public Institucion(Long id, Integer idCoordinador, String nombre, int telefono, String ubicacion ) {
         this.idInstitucion = id;
+        this.idCoordinador = idCoordinador;
         this.nombreInstitucion = nombre;
         this.telefono = telefono;
         this.ubicacionInstitucion = ubicacion;
+
     }
 
     //GETTERS Y SETTERS
@@ -51,5 +55,13 @@ public class Institucion {
 
     public void setUbicacionInstitucion(String ubicacion) {
         this.ubicacionInstitucion = ubicacion;
+    }
+
+    public Integer getIdCoordinador() {
+        return idCoordinador;
+    }
+
+    public void setIdCoordinador(Integer idCoordinador) {
+        this.idCoordinador = idCoordinador;
     }
 }

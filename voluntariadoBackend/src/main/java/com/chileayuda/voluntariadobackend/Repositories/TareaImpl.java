@@ -27,10 +27,12 @@ public class TareaRepositoryImpl implements TareaRepository {
     @Override
     public Tarea createTarea (Tarea tarea) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO tarea (idTarea,nombreTarea)"+
-                    "VALUES (:idTarea, :nombreTarea)";
+            String sql = "INSERT TO tarea (idTarea,idEmergencia,idEstado_tarea,nombreTarea)"+
+                    "VALUES (:idTarea, :idEmergencia, :idEstado_tarea, :nombreTarea)";
             connection.createQuery(sql, true)
                     .addParameter("idTarea", tarea.getIdTarea())
+                    .addParameter("idEmergencia", tarea.getIdEmergencia())
+                    .addParameter("idEstado_tarea", tarea.getIdEstado_tarea())
                     .addParameter("nombreTarea", tarea.getNombreTarea())
                     .executeUpdate();
             return tarea;
@@ -89,10 +91,12 @@ public class TareaRepositoryImpl implements TareaRepository {
     public Tarea updateTarea(Tarea tareaUpdate) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Tarea " +
-                            "SET nombreTarea =:nombreTarea" +
+                            "SET idEmergencia =:idEmergencia, idEstado_tarea =:idEstado_tarea, nombreTarea =:nombreTarea" +
                             "WHERE idTarea =:idTarea")
-                    .addParameter("idTarea", tareaUpdate.getIdTarea())
-                    .addParameter("nombreTarea", tareaUpdate.getNombreTarea())
+                    .addParameter("idTarea", tarea.getIdTarea())
+                    .addParameter("idEmergencia", tarea.getIdEmergencia())
+                    .addParameter("idEstado_tarea", tarea.getIdEstado_tarea())
+                    .addParameter("nombreTarea", tarea.getNombreTarea())
                     .executeUpdate();
             return Tarea;
         } catch (Exception exception) {
