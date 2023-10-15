@@ -3,10 +3,11 @@ package com.chileayuda.voluntariadobackend.Models;
 public class Emergencia {
     //ATRIBUTOS
     private Integer id_emergencia;
+    private Integer id_institucion;
     private String tipo;
     private String ubicacion;
     private String equipamiento_necesario;
-    private Integer id_institucion;
+
 
     //CONSTRUCTORES
     public Emergencia(){}

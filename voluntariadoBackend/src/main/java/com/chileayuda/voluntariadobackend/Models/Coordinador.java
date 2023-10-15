@@ -10,11 +10,11 @@ public class Coordinador {
     private String email_coordinador;
     private String password_coordinador;
 
-    public Coordinador(Integer id_coordinador, String nombre_coordinador, String email, String password) {
+    public Coordinador(Integer id_coordinador, String nombre_coordinador, String email_coordinador, String password_coordinador) {
         this.id_coordinador = id_coordinador;
         this.nombre_coordinador = nombre_coordinador;
-        this.email_coordinador = email;
-        this.password_coordinador = password;
+        this.email_coordinador = email_coordinador;
+        this.password_coordinador = password_coordinador;
     }
 
     public Integer getId_coordinador() {

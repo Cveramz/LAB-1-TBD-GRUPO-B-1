@@ -4,10 +4,10 @@ import com.chileayuda.voluntariadobackend.Models.Institucion;
 import java.util.List;
 public interface InstitucionRepository {
 
-    /* metodos abstractos declarados
+    /* metodos abstractos declarados*/
     public Institucion createInstitucion(Institucion institucion);
-    public Institucion getInstitucionById(Long id);
+    public List<Institucion> getInstitucionById(Long id);
     public List<Institucion> findAllInstituciones();
     public Institucion updateInstitucion(Institucion institucionUpdate);
-    public void deleteInstitucionById(Long id);*/
+    public void deleteInstitucionById(Long id);
 }

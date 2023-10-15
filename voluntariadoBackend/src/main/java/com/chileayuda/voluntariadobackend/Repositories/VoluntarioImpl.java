@@ -23,57 +23,57 @@ public class VoluntarioImpl implements VoluntarioRepository {
      * @param vol_in - un objeto que contiene los datos del voluntario;
      * * @return - el voluntario creado y guardado en la base de datos;
      *
-      ------------------------------------------------------------------------------------------------------
+      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Voluntario createVol (Voluntario voluntario) {
+    public Voluntario createVol(Voluntario voluntario) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO voluntario (idVoluntario,nombreVoluntario,edad,equipamiento,estado_salud,disponibilidad,emailVoluntario,passwordVoluntario)"+
-                    "VALUES (:idVoluntario, :nombreVoluntario, :edad, :estado_salud, :disponibilidad, :emailVoluntario, :passwordVoluntario)";
+            String sql = "INSERT TO voluntario (id_voluntario,nombre_voluntario,edad,equipamiento,estado_salud,disponibilidad,email_voluntario,password_voluntario)" +
+                    "VALUES (:id_voluntario, :nombr_voluntario, :edad, :estado_salud, :disponibilidad, :email_voluntario, :password_voluntario)";
             connection.createQuery(sql, true)
-                    .addParameter("idVoluntario", voluntario.getIdVoluntario())
-                    .addParameter("nombreVoluntario", voluntario.getNombreVoluntario())
-                    .addParameter("edad",voluntario.getEdad())
+                    .addParameter("id_Voluntario", voluntario.getId_voluntario())
+                    .addParameter("nombre_voluntario", voluntario.getNombre_voluntario())
+                    .addParameter("edad", voluntario.getEdad())
                     .addParameter("estado_salud", voluntario.getEstado_salud())
-                    .addParameter("Disponibilidad", voluntario.getDisponibilidad())
-                    .addParameter("emailVoluntario", voluntario.getEmailVoluntario())
-                    .addParameter("passwordVoluntario", voluntario.getPasswordVoluntario())
+                    .addParameter("disponibilidad", voluntario.getDisponibilidad())
+                    .addParameter("email_voluntario", voluntario.getEmail_voluntario())
+                    .addParameter("password_voluntario", voluntario.getPassword_voluntario())
                     .executeUpdate();
             return voluntario;
-        } catch (Exception exception){
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;
         }
     }
---*/
+
     /*--------------------------------------------------------------------------------------------------------
      * getVolById: metodod que obtiene un voluntario especifico de la BD con su id;
      *
      * @param id_inst - id del voluntario;
      * @return - el voluntario buscado;
      *
-     --------------------------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Voluntario getVolById(Long idVoluntario){
+    public List<Voluntario> getVolById(Long id_voluntario) {
         try (Connection connection = sql2o.open()) {
-            return connection.createQuery("SELECT * FROM Voluntario WHERE idVoluntario = :idVoluntario")
-                    .addParameter("idVoluntario", idVoluntario)
+            return connection.createQuery("SELECT * FROM Voluntario WHERE id_voluntario = :id_voluntario")
+                    .addParameter("id_voluntario", id_voluntario)
                     .executeAndFetch(Voluntario.class);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;
         }
     }
-------*/
+
     /*--------------------------------------------------------------------------------------------------------
      * findAll: metodo que obtiene todos los voluntarios de la BD;
      *
      * @return - una lista con los voluntarios presentes en la BD;
      *
-     ---------------------------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Voluntario> findAllVoluntarios(){
-        try(Connection connection = sql2o.open()){
-            return connection.createQuery("SELECT * FROM Voluntario ORDER BY idVoluntario ASC")
+    public List<Voluntario> findAllVoluntarios() {
+        try (Connection connection = sql2o.open()) {
+            return connection.createQuery("SELECT * FROM Voluntario ORDER BY id_voluntario ASC")
                     .executeAndFetch(Voluntario.class);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -82,49 +82,50 @@ public class VoluntarioImpl implements VoluntarioRepository {
 
 
     }
------*/
+
     /*--------------------------------------------------------------------------------------------------------
      * updateVol: metodo que actualiza los datos de un voluntario en la BD;
      *
      * @param instUpdate - el objeto con el id del voluntario y los nuevos datos;
      * @return - los datos del voluntario actualizados;
      *
-     -----------------------------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------------------------------*/
     @Override
     public Voluntario updateVol(Voluntario voluntarioUpdate) {
-        try(Connection connection = sql2o.open()) {
+        try (Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Voluntario " +
-                            "SET nombreVoluntario =:nombreVoluntario, edad =:edad, estado_salud =:estado_salud, disponibilidad =:disponibilidad, emailVoluntario =:emailVoluntario, passwordVoluntario =:passwordVoluntario" +
-                            "WHERE idVoluntario =:idVoluntario")
-                    .addParameter("idVoluntario", voluntario.getIdVoluntario())
-                    .addParameter("nombreVoluntario", voluntario.getNombreVoluntario())
-                    .addParameter("edad",voluntario.getEdad())
-                    .addParameter("estado_salud", voluntario.getEstado_salud())
-                    .addParameter("Disponibilidad", voluntario.getDisponibilidad())
-                    .addParameter("emailVoluntario", voluntario.getEmailVoluntario())
-                    .addParameter("passwordVoluntario", voluntario.getPasswordVoluntario())
+                            "SET nombre_voluntario =:nombre_voluntario, edad =:edad, estado_salud =:estado_salud, disponibilidad =:disponibilidad, email_voluntario =:email_voluntario, password_voluntario =:password_voluntario" +
+                            "WHERE id_voluntario =:id_voluntario")
+                    .addParameter("id_voluntario", voluntarioUpdate.getId_voluntario())
+                    .addParameter("nombre_voluntario", voluntarioUpdate.getNombre_voluntario())
+                    .addParameter("edad", voluntarioUpdate.getEdad())
+                    .addParameter("estado_salud", voluntarioUpdate.getEstado_salud())
+                    .addParameter("disponibilidad", voluntarioUpdate.getDisponibilidad())
+                    .addParameter("email_voluntario", voluntarioUpdate.getEmail_voluntario())
+                    .addParameter("password_voluntario", voluntarioUpdate.getPassword_voluntario())
                     .executeUpdate();
-            return voluntario;
+            return voluntarioUpdate;
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;
         }
     }
 
----*/
+
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdVol: metodo que borra un voluntario de la BD;
      *
      * @param id - id del voluntario a eliminar;
      *
-     -----------------------------------------------------------------------------------------------------
+     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdVol(Long idVoluntario) {
-        try(Connection connection = sql2o.open()) {
-            connection.createQuery("DELETE FROM Voluntario WHERE idVoluntario =:idVoluntario")
-                    .addParameter("idVoluntario", idVoluntario)
+    public void deleteByIdVol(Long id_voluntario) {
+        try (Connection connection = sql2o.open()) {
+            connection.createQuery("DELETE FROM Voluntario WHERE id_voluntario =:id_voluntario")
+                    .addParameter("id_voluntario", id_voluntario)
                     .executeUpdate();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
-        }---*/
+        }
     }
+}

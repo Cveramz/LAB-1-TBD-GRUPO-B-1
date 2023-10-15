@@ -1,11 +1,11 @@
 package com.chileayuda.voluntariadobackend.Models;
 
-public class eme_habilidad {
+public class Eme_habilidad {
     private Integer id_eme_habilidad;
     private Integer id_emergencia;
     private Integer id_habilidad;
 
-    public eme_habilidad(Integer id_eme_habilidad, Integer id_emergencia, Integer id_habilidad) {
+    public Eme_habilidad(Integer id_eme_habilidad, Integer id_emergencia, Integer id_habilidad) {
         this.id_eme_habilidad = id_eme_habilidad;
         this.id_emergencia = id_emergencia;
         this.id_habilidad = id_habilidad;
