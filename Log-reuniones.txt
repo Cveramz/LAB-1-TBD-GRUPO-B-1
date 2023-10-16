@@ -32,3 +32,12 @@ Notas de la reunión:
 Observaciones:
 La tabla ranking deberia tener una pk serial, FK id voluntario, y un
 atributo de puntaje, para lograr obtener los lugares.
+
+
+15/10/2023 - 20:00hrs;
+
+Notas de la reunión:
+
+1) Planificación de estructura de Frontend y como abarcar los diferentes endpoints desde este.
+
+2) Planificación de creación de triggers por parte de la base de datos.
