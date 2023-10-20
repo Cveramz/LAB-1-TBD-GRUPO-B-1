@@ -98,7 +98,7 @@ public class TareaImpl implements TareaRepository {
                     .addParameter("id_estado_tarea", tareaUpdate.getId_estado_tarea())
                     .addParameter("nombre_tarea", tareaUpdate.getNombre_tarea())
                     .executeUpdate();
-            return tareaUpdate;
+            return "Actualizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

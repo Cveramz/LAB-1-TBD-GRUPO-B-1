@@ -104,7 +104,7 @@ public class VoluntarioImpl implements VoluntarioRepository {
                     .addParameter("email_voluntario", voluntarioUpdate.getEmail_voluntario())
                     .addParameter("password_voluntario", voluntarioUpdate.getPassword_voluntario())
                     .executeUpdate();
-            return voluntarioUpdate;
+            return "Actualizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;
