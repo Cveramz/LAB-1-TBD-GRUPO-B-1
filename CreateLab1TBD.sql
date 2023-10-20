@@ -36,7 +36,9 @@ CREATE TABLE emergencia(
     id_institucion BIGINT REFERENCES institucion(id_institucion),
     tipo VARCHAR(50),
     ubicacion VARCHAR(50),
-    equipamiento_necesario VARCHAR(50)
+    equipamiento_necesario VARCHAR(50),
+    titulo VARCHAR(50),
+    descripcion VARCHAR(100)
 );
 
 -- Tabla Eme_habilidad
