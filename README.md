@@ -9,3 +9,14 @@
 ## TECNOLOGÍAS Y VERSIÓN
 
  El presente proyecto utiliza las tecnologías: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
+
+
+## EJECUCIÓN BACKEND
+
+Se debe abrir la carpeta voluntariadoBackend con Intellij Idea y seleccionar el archivo que está en la ruta \src\main\java\com\chileayuda\voluntariadobackend llamado VoluntariadoBackendApplication para dar a correr.
+
+## EJECUCIÓN FRONTEND
+
+Se debe abrir la carpeta frontend desde el terminal y ejecutar los comandos
+- npm install
+- npm run dev
