@@ -50,7 +50,7 @@ public class RankingImpl implements RankingRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Ranking> getRankingById(Long id_ranking){
+    public List<Ranking> getRankingById(Integer id_ranking){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Ranking WHERE id_ranking = :id_ranking")
                     .addParameter("id_ranking", id_ranking)
@@ -88,14 +88,14 @@ public class RankingImpl implements RankingRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Ranking updateRanking(Ranking rankingUpdate) {
+    public Ranking updateRanking(Ranking rankingUpdate, Integer id_ranking) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Ranking " +
-                            "SET idVoluntario =:idVoluntario, idTarea =:idTarea, puntos_requisito =:puntos_requisitos" +
-                            "WHERE idRanking =:idRanking")
-                    .addParameter("idRanking", rankingUpdate.getId_ranking())
-                    .addParameter("idVoluntario", rankingUpdate.getId_voluntario())
-                    .addParameter("idTarea", rankingUpdate.getId_tarea())
+                            "SET id_voluntario =:id_voluntario, id_tarea =:id_tarea, puntos_requisito =:puntos_requisito" +
+                            "WHERE id_ranking =:id_ranking")
+                    .addParameter("id_ranking", id_ranking)
+                    .addParameter("id_voluntario", rankingUpdate.getId_voluntario())
+                    .addParameter("id_tarea", rankingUpdate.getId_tarea())
                     .addParameter("puntos_requisito", rankingUpdate.getPuntos_requisito())
                     .executeUpdate();
             return rankingUpdate;
@@ -112,10 +112,10 @@ public class RankingImpl implements RankingRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteRankingById(Long idRanking) {
+    public void deleteRankingById(Integer idRanking) {
         try(Connection connection = sql2o.open()) {
-            connection.createQuery("DELETE FROM Ranking WHERE idRanking =:idRanking")
-                    .addParameter("idRanking", idRanking)
+            connection.createQuery("DELETE FROM Ranking WHERE id_ranking =:id_ranking")
+                    .addParameter("id_ranking", idRanking)
                     .executeUpdate();
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

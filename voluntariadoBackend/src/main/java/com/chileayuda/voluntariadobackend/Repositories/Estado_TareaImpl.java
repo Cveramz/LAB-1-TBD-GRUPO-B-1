@@ -46,7 +46,7 @@ public class Estado_TareaImpl implements Estado_TareaRepository{
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Estado_Tarea> getEstado_tareaById(Long id_estado_tarea){
+    public List<Estado_Tarea> getEstado_tareaById(Integer id_estado_tarea){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Estado_Tarea WHERE id_estado_tarea = :id_estado_tarea")
                     .addParameter("id_estado_tarea", id_estado_tarea)
@@ -84,12 +84,12 @@ public class Estado_TareaImpl implements Estado_TareaRepository{
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public Estado_Tarea updateEstado_tarea(Estado_Tarea estado_tareaUpdate) {
+    public Estado_Tarea updateEstado_tarea(Estado_Tarea estado_tareaUpdate, Integer id_estado_tarea) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Estado_tarea " +
                             "SET estado =:estado" +
                             "WHERE id_estado_tarea =:id_estado_tarea")
-                    .addParameter("id_estado_tarea", estado_tareaUpdate.getId_estado_tarea())
+                    .addParameter("id_estado_tarea", id_estado_tarea)
                     .addParameter("estado", estado_tareaUpdate.getEstado())
                     .executeUpdate();
             return estado_tareaUpdate;
@@ -106,7 +106,7 @@ public class Estado_TareaImpl implements Estado_TareaRepository{
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdEstado_tarea(Long id_estado_tarea) {
+    public void deleteByIdEstado_tarea(Integer id_estado_tarea) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Estado_Tarea WHERE id_estado_tarea =:id_estado_tarea")
                     .addParameter("id_estado_tarea", id_estado_tarea)

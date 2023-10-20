@@ -6,9 +6,9 @@ public interface TareaRepository {
 
     /* metodos abstractos declarados*/
     public Tarea createTarea(Tarea tarea_in);
-    public List<Tarea> getTareaById(Long id);
+    public List<Tarea> getTareaById(Integer id);
     public List<Tarea> findAllTareas();
-    public Tarea updateTarea(Tarea tareaUpdate);
-    public void deleteByIdTarea(Long id);
+    public Tarea updateTarea(Tarea tareaUpdate, Integer id);
+    public void deleteByIdTarea(Integer id);
 
 }

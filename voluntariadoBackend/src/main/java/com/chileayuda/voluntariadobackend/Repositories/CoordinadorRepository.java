@@ -7,8 +7,8 @@ public interface CoordinadorRepository {
 
     /* metodos abstractos declarados */
     public Coordinador createCoordinador(Coordinador coordinador);
-    public List<Coordinador> getCoordinadorById(Long id);
+    public List<Coordinador> getCoordinadorById(Integer id);
     public List<Coordinador> findAllCoordinadores();
-    public Coordinador updateCoordinador(Coordinador coordinadorUpdate);
-    public void deleteByIdCoordinador(Long id);
+    public Coordinador updateCoordinador(Coordinador coordinadorUpdate,Integer id_coordinador);
+    public void deleteByIdCoordinador(Integer id);
 }

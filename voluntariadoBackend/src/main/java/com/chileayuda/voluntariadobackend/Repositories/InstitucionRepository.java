@@ -6,8 +6,8 @@ public interface InstitucionRepository {
 
     /* metodos abstractos declarados*/
     public Institucion createInstitucion(Institucion institucion);
-    public List<Institucion> getInstitucionById(Long id);
+    public List<Institucion> getInstitucionById(Integer id);
     public List<Institucion> findAllInstituciones();
-    public Institucion updateInstitucion(Institucion institucionUpdate);
-    public void deleteInstitucionById(Long id);
+    public Institucion updateInstitucion(Institucion institucionUpdate, Integer id);
+    public void deleteInstitucionById(Integer id);
 }

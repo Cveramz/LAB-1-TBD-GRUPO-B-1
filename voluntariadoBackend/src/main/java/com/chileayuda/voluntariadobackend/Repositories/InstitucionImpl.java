@@ -52,7 +52,7 @@ public class InstitucionImpl implements InstitucionRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Institucion> getInstitucionById(Long id_institucion){
+    public List<Institucion> getInstitucionById(Integer id_institucion){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Institucion WHERE id_institucion = :id_institucion")
                     .addParameter("id_institucion", id_institucion)
@@ -86,12 +86,12 @@ public class InstitucionImpl implements InstitucionRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Institucion updateInstitucion(Institucion institucionUpdate) {
+    public Institucion updateInstitucion(Institucion institucionUpdate, Integer id_institucion) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Institucion " +
                             "SET id_coordinador =:id_coordinador, nombre_institucion =:nombre_institucion, telefono =:telefono, ubicacion_institucion =:ubicacionInstitucion" +
                             "WHERE id_institucion =:id_institucion")
-                    .addParameter("id_institucion", institucionUpdate.getId_institucion())
+                    .addParameter("id_institucion", id_institucion)
                     .addParameter("id_coordinador", institucionUpdate.getId_coordinador())
                     .addParameter("nombre_institucion", institucionUpdate.getNombre_institucion())
                     .addParameter("telefono", institucionUpdate.getTelefono())
@@ -110,7 +110,7 @@ public class InstitucionImpl implements InstitucionRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteInstitucionById (Long id_institucion) {
+    public void deleteInstitucionById (Integer id_institucion) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Institucion WHERE id_institucion =:id_institucion")
                     .addParameter("id_institucion", id_institucion)

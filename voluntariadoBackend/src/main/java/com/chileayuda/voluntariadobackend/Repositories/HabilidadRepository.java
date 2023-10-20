@@ -7,9 +7,9 @@ public interface HabilidadRepository {
 
     /* metodos abstractos declarados*/
     public Habilidad createHabilidad(Habilidad habilidad);
-    public List<Habilidad> getHabilidadById(Long id);
+    public List<Habilidad> getHabilidadById(Integer id);
     public List<Habilidad> findAllHabilidades();
-    public Habilidad updateHabilidad(Habilidad habilidadUpdate);
-    public void deleteHabilidadById(Long id);
+    public Habilidad updateHabilidad(Habilidad habilidadUpdate, Integer id);
+    public void deleteHabilidadById(Integer id);
 
 }

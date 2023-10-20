@@ -46,7 +46,7 @@ public class Vol_habilidadImpl implements Vol_HabilidadRepository{
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Vol_habilidad> getVol_habilidadById(Long id_vol_habilidad){
+    public List<Vol_habilidad> getVol_habilidadById(Integer id_vol_habilidad){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Vol_habilidad WHERE id_vol_habilidad = :id_vol_habilidad")
                     .addParameter("id_vol_habilidad", id_vol_habilidad)
@@ -84,12 +84,12 @@ public class Vol_habilidadImpl implements Vol_HabilidadRepository{
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public Vol_habilidad updateVol_habilidad(Vol_habilidad vol_habilidadUpdate) {
+    public Vol_habilidad updateVol_habilidad(Vol_habilidad vol_habilidadUpdate, Integer id_vol_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Vol_habilidad " +
                             "SET id_voluntario =:id_voluntario, id_habilidad =:id_habilidad" +
                             "WHERE id_vol_habilidad =:id_vol_habilidad")
-                    .addParameter("id_vol_habilidad", vol_habilidadUpdate.getId_vol_habilidad())
+                    .addParameter("id_vol_habilidad", id_vol_habilidad)
                     .addParameter("id_voluntario", vol_habilidadUpdate.getId_voluntario())
                     .addParameter("id_habilidad", vol_habilidadUpdate.getId_habilidad())
                     .executeUpdate();
@@ -107,7 +107,7 @@ public class Vol_habilidadImpl implements Vol_HabilidadRepository{
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdVol_habilidad(Long id_vol_habilidad) {
+    public void deleteByIdVol_habilidad(Integer id_vol_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Vol_habilidad WHERE id_vol_habilidad =:id_vol_habilidad")
                     .addParameter("id_vol_habilidad", id_vol_habilidad)

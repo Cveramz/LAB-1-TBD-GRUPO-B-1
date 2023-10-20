@@ -50,7 +50,7 @@ public class TareaImpl implements TareaRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Tarea> getTareaById(Long id_tarea){
+    public List<Tarea> getTareaById(Integer id_tarea){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Tarea WHERE id_tarea = :id_tarea")
                     .addParameter("id_tarea", id_tarea)
@@ -88,12 +88,12 @@ public class TareaImpl implements TareaRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Tarea updateTarea(Tarea tareaUpdate) {
+    public Tarea updateTarea(Tarea tareaUpdate, Integer id_tarea) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Tarea " +
                             "SET idEmergencia =:id_emergencia, id_estado_tarea =:id_estado_tarea, nombre_tarea =:nombre_tarea" +
                             "WHERE id_tarea =:id_tarea")
-                    .addParameter("id_tarea", tareaUpdate.getId_tarea())
+                    .addParameter("id_tarea", id_tarea)
                     .addParameter("id_emergencia", tareaUpdate.getId_emergencia())
                     .addParameter("id_estado_tarea", tareaUpdate.getId_estado_tarea())
                     .addParameter("nombre_tarea", tareaUpdate.getNombre_tarea())
@@ -112,7 +112,7 @@ public class TareaImpl implements TareaRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdTarea(Long id_tarea) {
+    public void deleteByIdTarea(Integer id_tarea) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Tarea WHERE id_tarea =:id_tarea")
                     .addParameter("id_tarea", id_tarea)

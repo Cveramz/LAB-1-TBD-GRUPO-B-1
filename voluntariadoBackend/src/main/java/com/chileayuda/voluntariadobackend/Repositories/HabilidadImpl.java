@@ -48,7 +48,7 @@ public class HabilidadImpl implements HabilidadRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Habilidad> getHabilidadById(Long id_habilidad){
+    public List<Habilidad> getHabilidadById(Integer id_habilidad){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Habilidad WHERE id_habilidad = :id_habilidad")
                     .addParameter("id_habilidad", id_habilidad)
@@ -84,12 +84,12 @@ public class HabilidadImpl implements HabilidadRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Habilidad updateHabilidad(Habilidad habilidadUpdate) {
+    public Habilidad updateHabilidad(Habilidad habilidadUpdate, Integer id_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Habilidad " +
                             "SET nombre_habilidad =:nombre_habilidad" +
                             "WHERE id_habilidad =:id_habilidad")
-                    .addParameter("idHabilidad", habilidadUpdate.getId_habilidad())
+                    .addParameter("idHabilidad",id_habilidad)
                     .addParameter("nombreHabilidad", habilidadUpdate.getNombre_habilidad())
                     .executeUpdate();
             return habilidadUpdate;
@@ -106,7 +106,7 @@ public class HabilidadImpl implements HabilidadRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteHabilidadById(Long id_habilidad) {
+    public void deleteHabilidadById(Integer id_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Habilidad WHERE id_habilidad =:id_habilidad")
                     .addParameter("id_habilidad", id_habilidad)

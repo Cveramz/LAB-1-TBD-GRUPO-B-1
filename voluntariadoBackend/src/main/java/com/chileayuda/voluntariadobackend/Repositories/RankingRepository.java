@@ -6,9 +6,9 @@ public interface RankingRepository {
 
     /* metodos abstractos declarados*/
     public Ranking createRanking(Ranking ranking);
-    public List<Ranking> getRankingById(Long id);
+    public List<Ranking> getRankingById(Integer id);
     public List<Ranking> findAllRankings();
-    public Ranking updateRanking(Ranking rankingUpdate);
-    public void deleteRankingById( Long id);
+    public Ranking updateRanking(Ranking rankingUpdate, Integer id);
+    public void deleteRankingById( Integer id);
 
 }

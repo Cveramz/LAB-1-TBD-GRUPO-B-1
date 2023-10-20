@@ -6,9 +6,9 @@ public interface VoluntarioRepository {
 
     /* metodos abstractos declarados*/
     public Voluntario createVol(Voluntario vol_in);
-    public List<Voluntario> getVolById(Long id);
+    public List<Voluntario> getVolById(Integer id);
     public List<Voluntario> findAllVoluntarios();
-    public Voluntario updateVol(Voluntario volUpdate);
-    public void deleteByIdVol(Long id);
+    public Voluntario updateVol(Voluntario volUpdate, Integer id);
+    public void deleteByIdVol(Integer id);
 
 }

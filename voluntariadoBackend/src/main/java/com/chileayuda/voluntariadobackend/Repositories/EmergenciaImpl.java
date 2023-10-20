@@ -25,8 +25,8 @@ public class EmergenciaImpl implements EmergenciaRepository {
     @Override
     public Emergencia createEmergencia (Emergencia emergencia_in) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO emergencia_in (id_emergencia,id_institucion, tipo,ubicacion,equipamiento_necesario)" +
-                    "VALUES (:id_emergencia, :id_institucion, :tipo, :ubicacion, :equipamiento_necesario)";
+            String sql = "INSERT TO emergencia_in (id_emergencia,id_institucion, tipo,ubicacion,equipamiento_necesario, titulo, descripcion)" +
+                    "VALUES (:id_emergencia, :id_institucion, :tipo, :ubicacion, :equipamiento_necesario, :titulo, :descripcion)";
             connection.createQuery(sql, true)
                     .addParameter("id_emergencia", emergencia_in.getIdEmergencia())
                     .addParameter("id_institucion", emergencia_in.getIdInstitucion())
@@ -51,7 +51,7 @@ public class EmergenciaImpl implements EmergenciaRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Emergencia> getEmergenciaById(Long id_emergencia){
+    public List<Emergencia> getEmergenciaById(Integer id_emergencia){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Emergencia WHERE id_emergencia = :id_emergencia")
                     .addParameter("id_emergencia", id_emergencia)
@@ -89,12 +89,12 @@ public class EmergenciaImpl implements EmergenciaRepository {
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public Emergencia updateEmergencia(Emergencia emergenciaUpdate) {
+    public Emergencia updateEmergencia(Emergencia emergenciaUpdate, Integer id_emergencia) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Emergencia " +
                             "SET id_institucion =:id_institucion, tipo =:tipo, ubicacion =:ubicacion, equipamiento_necesario =:equipamiento_necesario" +
                             "WHERE id_emergencia =:id_emergencia")
-                    .addParameter("id_emergencia", emergenciaUpdate.getIdEmergencia())
+                    .addParameter("id_emergencia", id_emergencia)
                     .addParameter("id_institucion", emergenciaUpdate.getIdInstitucion())
                     .addParameter("tipo", emergenciaUpdate.getTipo())
                     .addParameter("emergencia", emergenciaUpdate.getUbicacion())
@@ -117,7 +117,7 @@ public class EmergenciaImpl implements EmergenciaRepository {
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdEmergencia(Long id_emergencia) {
+    public void deleteByIdEmergencia(Integer id_emergencia) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Emergencia WHERE id_emergencia =:id_emergencia")
                     .addParameter("id_emergencia", id_emergencia)

@@ -50,7 +50,7 @@ public class CoordinadorImp implements CoordinadorRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Coordinador> getCoordinadorById(Long id_coordinador){
+    public List<Coordinador> getCoordinadorById(Integer id_coordinador){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Coordinador WHERE id_coordinador = :id_coordinador")
                     .addParameter("id_coordinador", id_coordinador)
@@ -88,12 +88,12 @@ public class CoordinadorImp implements CoordinadorRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Coordinador updateCoordinador(Coordinador coordinadorUpdate) {
+    public Coordinador updateCoordinador(Coordinador coordinadorUpdate, Integer id_coordinador) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Coordinador " +
                             "SET nombre_coordinador =:nombre_coordinador, email_coordinador =:email_coordinador, password_coordinador =:password_coordinador" +
                             "WHERE id_coordinador =:id_coordinador")
-                    .addParameter("id_coordinador", coordinadorUpdate.getId_coordinador())
+                    .addParameter("id_coordinador", id_coordinador)
                     .addParameter("nombre_coordinador", coordinadorUpdate.getNombre_coordinador())
                     .addParameter("email_coordinador", coordinadorUpdate.getEmail_coordinador())
                     .addParameter("password_coordinador", coordinadorUpdate.getPassword_coordinador())
@@ -112,7 +112,7 @@ public class CoordinadorImp implements CoordinadorRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdCoordinador(Long id_coordinador) {
+    public void deleteByIdCoordinador(Integer id_coordinador) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Coordinador WHERE id_coordinador =:id_coordinador")
                     .addParameter("id_coordinador", id_coordinador)

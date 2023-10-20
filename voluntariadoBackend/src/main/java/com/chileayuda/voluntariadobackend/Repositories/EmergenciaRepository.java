@@ -9,8 +9,8 @@ public interface EmergenciaRepository {
     /* metodos abstractos declarados*/
 
     public Emergencia createEmergencia(Emergencia emergencia_in);
-    public List<Emergencia> getEmergenciaById(Long id);
+    public List<Emergencia> getEmergenciaById(Integer id);
     public List<Emergencia> findAllEmergency();
-    public Emergencia updateEmergencia(Emergencia emergenciaUpdate);
-    public void deleteByIdEmergencia(Long id);
+    public Emergencia updateEmergencia(Emergencia emergenciaUpdate, Integer id);
+    public void deleteByIdEmergencia(Integer id);
 }

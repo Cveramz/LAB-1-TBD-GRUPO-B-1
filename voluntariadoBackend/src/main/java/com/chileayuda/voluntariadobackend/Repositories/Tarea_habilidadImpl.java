@@ -47,7 +47,7 @@ public class Tarea_habilidadImpl implements Tarea_HabilidadRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public List<Tarea_habilidad> getTarea_habilidadById(Long id_tarea_habilidad){
+    public List<Tarea_habilidad> getTarea_habilidadById(Integer id_tarea_habilidad){
         try (Connection connection = sql2o.open()) {
             return connection.createQuery("SELECT * FROM Tarea_habilidad WHERE id_tarea_habilidad = :id_tarea_habilidad")
                     .addParameter("id_tarea_habilidad", id_tarea_habilidad)
@@ -85,12 +85,12 @@ public class Tarea_habilidadImpl implements Tarea_HabilidadRepository {
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public Tarea_habilidad updateTarea_habilidad(Tarea_habilidad tarea_habilidadUpdate) {
+    public Tarea_habilidad updateTarea_habilidad(Tarea_habilidad tarea_habilidadUpdate, Integer id_tarea_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Tarea_habilidad " +
                             "SET id_tarea =:id_tarea, id_habilidad =:id_habilidad" +
                             "WHERE id_tarea_habilidad =:id_tarea_habilidad")
-                    .addParameter("id_tarea_habilidad", tarea_habilidadUpdate.getId_tarea_habilidad())
+                    .addParameter("id_tarea_habilidad", id_tarea_habilidad)
                     .addParameter("id_tarea", tarea_habilidadUpdate.getId_tarea())
                     .addParameter("id_habilidad", tarea_habilidadUpdate.getId_habilidad())
                     .executeUpdate();
@@ -108,7 +108,7 @@ public class Tarea_habilidadImpl implements Tarea_HabilidadRepository {
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public void deleteByIdTarea_habilidad(Long id_tarea_habilidad) {
+    public void deleteByIdTarea_habilidad(Integer id_tarea_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("DELETE FROM Tarea_habilidad WHERE id_tarea_habilidad =:id_tarea_habilidad")
                     .addParameter("id_tarea_habilidad", id_tarea_habilidad)
