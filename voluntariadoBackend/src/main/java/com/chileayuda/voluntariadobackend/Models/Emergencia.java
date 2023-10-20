@@ -7,17 +7,21 @@ public class Emergencia {
     private String tipo;
     private String ubicacion;
     private String equipamiento_necesario;
+    private String titulo;
+    private String descripcion;
 
 
     //CONSTRUCTORES
     public Emergencia(){}
 
-    public Emergencia(Integer id, Integer idInstitucion, String tipo, String ubicacion, String equipamiento_necesario ) {
+    public Emergencia(Integer id, Integer idInstitucion, String tipo, String ubicacion, String equipamiento_necesario, String titulo, String descripcion ) {
         this.id_emergencia = id;
         this.id_institucion = idInstitucion;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.equipamiento_necesario = equipamiento_necesario;
+        this.titulo = titulo;
+        this.descripcion  = descripcion;
 
     }
 
@@ -60,5 +64,21 @@ public class Emergencia {
 
     public void setIdInstitucion(Integer idnstitucion) {
         this.id_institucion = id_institucion;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

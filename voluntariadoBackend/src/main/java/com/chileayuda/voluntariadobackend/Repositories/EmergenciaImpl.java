@@ -33,6 +33,8 @@ public class EmergenciaImpl implements EmergenciaRepository {
                     .addParameter("tipo", emergencia_in.getTipo())
                     .addParameter("ubicacion", emergencia_in.getUbicacion())
                     .addParameter("equipamiento_necesario", emergencia_in.getEquipamiento_necesario())
+                    .addParameter("titulo", emergencia_in.getTitulo())
+                    .addParameter("descripcion", emergencia_in.getDescripcion())
                     .executeUpdate();
             return emergencia_in;
         } catch (Exception exception) {
@@ -97,6 +99,9 @@ public class EmergenciaImpl implements EmergenciaRepository {
                     .addParameter("tipo", emergenciaUpdate.getTipo())
                     .addParameter("emergencia", emergenciaUpdate.getUbicacion())
                     .addParameter("equipamiento_necesario", emergenciaUpdate.getEquipamiento_necesario())
+                    .addParameter("titulo", emergenciaUpdate.getTitulo())
+                    .addParameter("descripcion", emergenciaUpdate.getDescripcion())
+
                     .executeUpdate();
             return emergenciaUpdate;
         } catch (Exception exception) {
