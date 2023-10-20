@@ -88,7 +88,7 @@ public class RankingImpl implements RankingRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Ranking updateRanking(Ranking rankingUpdate, Integer id_ranking) {
+    public String updateRanking(Ranking rankingUpdate, Integer id_ranking) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Ranking " +
                             "SET id_voluntario =:id_voluntario, id_tarea =:id_tarea, puntos_requisito =:puntos_requisito" +
@@ -98,7 +98,7 @@ public class RankingImpl implements RankingRepository {
                     .addParameter("id_tarea", rankingUpdate.getId_tarea())
                     .addParameter("puntos_requisito", rankingUpdate.getPuntos_requisito())
                     .executeUpdate();
-            return rankingUpdate;
+            return "Actualizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

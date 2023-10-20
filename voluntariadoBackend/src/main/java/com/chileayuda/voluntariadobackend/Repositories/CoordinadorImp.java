@@ -88,7 +88,7 @@ public class CoordinadorImp implements CoordinadorRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Coordinador updateCoordinador(Coordinador coordinadorUpdate, Integer id_coordinador) {
+    public String updateCoordinador(Coordinador coordinadorUpdate, Integer id_coordinador) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Coordinador " +
                             "SET nombre_coordinador =:nombre_coordinador, email_coordinador =:email_coordinador, password_coordinador =:password_coordinador" +
@@ -98,7 +98,7 @@ public class CoordinadorImp implements CoordinadorRepository {
                     .addParameter("email_coordinador", coordinadorUpdate.getEmail_coordinador())
                     .addParameter("password_coordinador", coordinadorUpdate.getPassword_coordinador())
                     .executeUpdate();
-            return coordinadorUpdate;
+            return "Coordinador actualizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

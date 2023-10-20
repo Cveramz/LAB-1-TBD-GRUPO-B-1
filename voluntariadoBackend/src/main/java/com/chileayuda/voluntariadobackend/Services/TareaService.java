@@ -1,17 +1,22 @@
 package com.chileayuda.voluntariadobackend.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.chileayuda.voluntariadobackend.Models.Tarea;
+import com.chileayuda.voluntariadobackend.Repositories.TareaRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+
+@CrossOrigin
+@RestController
 public class TareaService {
 
-    /* Capa de métodos del repositorio
-    @Autowired
-    private TareaRepository tareaRepo;
- */
+    private final com.chileayuda.voluntariadobackend.Repositories.TareaRepository tareaRepository;
+
+    public TareaService(TareaRepository tareaRepository) {
+        this.tareaRepository = tareaRepository;
+    }
+
     /* Servicios disponibles */
 
     /*--------------------------------------------------------------------------------------------------------
@@ -20,59 +25,54 @@ public class TareaService {
      * @param tarea_in - un objeto que contiene los datos de la tarea;
      * @return - la tarea creada y guardada en la base de datos;
      *
-    ----------------------------------------------------------------------------------------------------
-    public Tarea createTarea(Tarea tarea_in) {
-        return tareaRepo.save(tarea_in);
-    }----*/
-
+    --------------------------------------------------------------------*/
+    @PostMapping("/tarea")
+    @ResponseBody
+    public Tarea create(@RequestBody Tarea tarea) {
+        return tareaRepository.createTarea(tarea);
+    }
     /*--------------------------------------------------------------------------------------------------------
      * getTareaById: método que obtiene una tarea específica de la BD con su id;
      *
      * @param id_tarea - id de la tarea;
      * @return - la tarea buscada;
      *
-    ----------------------------------------------------------------------------------------------------
-    public Tarea getTareaById(Long id_tarea) {
-        return tareaRepo.getById(id_tarea);
-    }----*/
-
+    -------------------------------------------------------*/
+    @GetMapping("/tarea/{id_tarea}")
+    public List<Tarea> getTareas(@PathVariable Integer id_tarea) {
+        return tareaRepository.getTareaById(id_tarea);
+    }
     /*--------------------------------------------------------------------------------------------------------
      * findAll: método que obtiene todas las tareas de la BD;
      *
      * @return - una lista con las tareas presentes en la BD;
      *
-    ----------------------------------------------------------------------------------------------------
-    public List<Tarea> findAll() {
-        return tareaRepo.findAll();
-    }----*/
-
+    --------------------------------------------------*/
+    @GetMapping("/tarea")
+    public List<Tarea> getAllTareas() {
+        return tareaRepository.findAllTareas();
+    }
     /*--------------------------------------------------------------------------------------------------------
      * updateTarea: método que actualiza los datos de una tarea en la BD;
      *
      * @param tareaUpdate - el objeto con el id de la tarea y los nuevos datos;
      * @return - los datos de la tarea actualizados;
      *
-    --------------------------------------------------------------------------------------------------
-    public Tarea updateTarea(Tarea tareaUpdate) {
-        Tarea presente = tareaRepo.findById(tareaUpdate.getId()).orElse(null);
-        if (presente != null) {
-            presente.setId(tareaUpdate.getId());
-            presente.setNombre(tareaUpdate.getNombre());
-            // Agregar código para actualizar otros atributos si es necesario
-            return tareaRepo.save(presente);
-        } else {
-            return null;
-        }
-    }------*/
-
+    -------------------------------------------*/
+    @PutMapping("/tarea/update/{id_tarea}")
+    @ResponseBody
+    public String updateTarea(@RequestBody Tarea tarea, @PathVariable Integer id_tarea) {
+        return tareaRepository.updateTarea(tarea, id_tarea);
+    }
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdTarea: método que borra una tarea de la BD;
      *
      * @param id_tarea - id de la tarea a eliminar;
      *
-    ----------------------------------------------------------------------------------------------------
-    public void deleteByIdTarea(Long id_tarea) {
-        tareaRepo.deleteById(id_tarea);
-    }----*/
+    --------------------------------------------------------------*/
+    @DeleteMapping("/tarea/{id_tarea}")
+    public void borrar(@PathVariable Integer id_tarea) {
+        tareaRepository.deleteByIdTarea(id_tarea);
+    }
 }
 

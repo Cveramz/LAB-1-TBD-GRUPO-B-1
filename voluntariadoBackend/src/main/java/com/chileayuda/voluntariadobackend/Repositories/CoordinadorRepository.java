@@ -9,6 +9,6 @@ public interface CoordinadorRepository {
     public Coordinador createCoordinador(Coordinador coordinador);
     public List<Coordinador> getCoordinadorById(Integer id);
     public List<Coordinador> findAllCoordinadores();
-    public Coordinador updateCoordinador(Coordinador coordinadorUpdate,Integer id_coordinador);
+    public String  updateCoordinador(Coordinador coordinadorUpdate,Integer id_coordinador);
     public void deleteByIdCoordinador(Integer id);
 }

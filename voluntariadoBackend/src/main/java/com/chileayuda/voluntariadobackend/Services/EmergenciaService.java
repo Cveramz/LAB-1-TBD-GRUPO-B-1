@@ -1,17 +1,22 @@
 package com.chileayuda.voluntariadobackend.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.chileayuda.voluntariadobackend.Models.Emergencia;
+import com.chileayuda.voluntariadobackend.Repositories.EmergenciaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+@CrossOrigin
+@RestController
 public class EmergenciaService {
+    private final com.chileayuda.voluntariadobackend.Repositories.EmergenciaRepository emergenciaRepository;
 
-    /* Capa de métodos del repositorio
-    @Autowired
-    private EmergenciaRepository emergenciaRepo;
- */
+    public EmergenciaService(EmergenciaRepository emergenciaRepository) {
+        this.emergenciaRepository = emergenciaRepository;
+    }
+
+
     /* Servicios disponibles */
 
     /*--------------------------------------------------------------------------------------------------------
@@ -20,10 +25,12 @@ public class EmergenciaService {
      * @param emergencia_in - un objeto que contiene los datos de la emergencia;
      * @return - la emergencia creada y guardada en la base de datos;
      *
-    ------------------------------------------------------------------------------------------------------
-    public Emergencia createEmergencia(Emergencia emergencia_in) {
-        return emergenciaRepo.save(emergencia_in);
-    }--*/
+    --------------------------------------------------------------------------------------------------------*/
+    @PostMapping("/emergencia")
+    @ResponseBody
+    public Emergencia create(@RequestBody Emergencia emergencia) {
+        return emergenciaRepository.createEmergencia(emergencia);
+    }
 
     /*--------------------------------------------------------------------------------------------------------
      * getEmergenciaById: método que obtiene una emergencia específica de la BD con su id;
@@ -31,49 +38,42 @@ public class EmergenciaService {
      * @param id_emergencia - id de la emergencia;
      * @return - la emergencia buscada;
      *
-    -------------------------------------------------------------------------------------------------------
-    public Emergencia getEmergenciaById(Long id_emergencia) {
-        return emergenciaRepo.getById(id_emergencia);
-    }-*/
+    --------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/emergencia/{id_emergencia}")
+    public List<Emergencia> getEmergenciaByID(@PathVariable Integer id_emergencia) {
+        return emergenciaRepository.getEmergenciaById(id_emergencia);
+    }
 
     /*--------------------------------------------------------------------------------------------------------
      * findAll: método que obtiene todas las emergencias de la BD;
      *
      * @return - una lista con las emergencias presentes en la BD;
      *
-    ------------------------------------------------------------------------------------------------------
-    public List<Emergencia> findAll() {
-        return emergenciaRepo.findAll();
+    --------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/emergencia")
+        public List<Emergencia> getAllEmergencias() {
+        return emergenciaRepository.findAllEmergency();
     }
---*/
     /*--------------------------------------------------------------------------------------------------------
      * updateEmergencia: método que actualiza los datos de una emergencia en la BD;
      *
      * @param emergenciaUpdate - el objeto con el id de la emergencia y los nuevos datos;
      * @return - los datos de la emergencia actualizados;
      *
-    ------------------------------------------------------------------------------------------------------
-    public Emergencia updateEmergencia(Emergencia emergenciaUpdate) {
-        Emergencia presente = emergenciaRepo.findById(emergenciaUpdate.getId()).orElse(null);
-        if (presente != null) {
-            presente.setId(emergenciaUpdate.getId());
-            presente.setTipo(emergenciaUpdate.getTipo());
-            presente.setUbicacion(emergenciaUpdate.getUbicacion());
-            presente.setEquipamiento_necesario(emergenciaUpdate.getEquipamiento_necesario());
-            // Agregar código para actualizar otros atributos si es necesario
-            return emergenciaRepo.save(presente);
-        } else {
-            return null;
-        }
+    --------------------------------------------------------------------------------------------------------*/
+    @PutMapping("/emergencia/update/{id_emergencia}")
+    @ResponseBody
+    public String updateEmergencia(@RequestBody Emergencia emergencia, @PathVariable Integer id_emergencia) {
+        return emergenciaRepository.updateEmergencia(emergencia, id_emergencia);
     }
---*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdEmergencia: método que borra una emergencia de la BD;
      *
      * @param id_emergencia - id de la emergencia a eliminar;
      *
-    --------------------------------------------------------------------------------------------------
-    public void deleteByIdEmergencia(Long id_emergencia) {
-        emergenciaRepo.deleteById(id_emergencia);
-    }------*/
+    --------------------------------------------------------------------------------------------------------*/
+    @DeleteMapping("/emergencia/{id_emergencia}")
+    public void borrar(@PathVariable Integer id_emergencia) {
+        emergenciaRepository.deleteByIdEmergencia(id_emergencia);
+    }
 }

@@ -84,7 +84,7 @@ public class HabilidadImpl implements HabilidadRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Habilidad updateHabilidad(Habilidad habilidadUpdate, Integer id_habilidad) {
+    public String updateHabilidad(Habilidad habilidadUpdate, Integer id_habilidad) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Habilidad " +
                             "SET nombre_habilidad =:nombre_habilidad" +
@@ -92,7 +92,7 @@ public class HabilidadImpl implements HabilidadRepository {
                     .addParameter("idHabilidad",id_habilidad)
                     .addParameter("nombreHabilidad", habilidadUpdate.getNombre_habilidad())
                     .executeUpdate();
-            return habilidadUpdate;
+            return "Actualizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

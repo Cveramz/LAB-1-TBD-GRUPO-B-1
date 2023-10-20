@@ -88,7 +88,7 @@ public class TareaImpl implements TareaRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Tarea updateTarea(Tarea tareaUpdate, Integer id_tarea) {
+    public String updateTarea(Tarea tareaUpdate, Integer id_tarea) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Tarea " +
                             "SET idEmergencia =:id_emergencia, id_estado_tarea =:id_estado_tarea, nombre_tarea =:nombre_tarea" +

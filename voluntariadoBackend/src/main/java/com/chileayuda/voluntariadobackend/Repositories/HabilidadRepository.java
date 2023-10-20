@@ -9,7 +9,7 @@ public interface HabilidadRepository {
     public Habilidad createHabilidad(Habilidad habilidad);
     public List<Habilidad> getHabilidadById(Integer id);
     public List<Habilidad> findAllHabilidades();
-    public Habilidad updateHabilidad(Habilidad habilidadUpdate, Integer id);
+    public String updateHabilidad(Habilidad habilidadUpdate, Integer id);
     public void deleteHabilidadById(Integer id);
 
 }

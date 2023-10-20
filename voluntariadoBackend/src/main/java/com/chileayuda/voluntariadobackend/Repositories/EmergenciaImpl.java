@@ -89,7 +89,7 @@ public class EmergenciaImpl implements EmergenciaRepository {
      *
     ------------------------------------------------------------------------------------------------------*/
     @Override
-    public Emergencia updateEmergencia(Emergencia emergenciaUpdate, Integer id_emergencia) {
+    public String updateEmergencia(Emergencia emergenciaUpdate, Integer id_emergencia) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Emergencia " +
                             "SET id_institucion =:id_institucion, tipo =:tipo, ubicacion =:ubicacion, equipamiento_necesario =:equipamiento_necesario" +
@@ -103,7 +103,7 @@ public class EmergenciaImpl implements EmergenciaRepository {
                     .addParameter("descripcion", emergenciaUpdate.getDescripcion())
 
                     .executeUpdate();
-            return emergenciaUpdate;
+            return "Informacion actualizada";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

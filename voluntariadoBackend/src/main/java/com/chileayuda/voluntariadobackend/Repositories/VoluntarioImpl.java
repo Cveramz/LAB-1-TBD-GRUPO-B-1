@@ -91,7 +91,7 @@ public class VoluntarioImpl implements VoluntarioRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Voluntario updateVol(Voluntario voluntarioUpdate, Integer id_voluntario) {
+    public String updateVol(Voluntario voluntarioUpdate, Integer id_voluntario) {
         try (Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Voluntario " +
                             "SET nombre_voluntario =:nombre_voluntario, edad =:edad, estado_salud =:estado_salud, disponibilidad =:disponibilidad, email_voluntario =:email_voluntario, password_voluntario =:password_voluntario" +

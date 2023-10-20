@@ -8,7 +8,7 @@ public interface TareaRepository {
     public Tarea createTarea(Tarea tarea_in);
     public List<Tarea> getTareaById(Integer id);
     public List<Tarea> findAllTareas();
-    public Tarea updateTarea(Tarea tareaUpdate, Integer id);
+    public String updateTarea(Tarea tareaUpdate, Integer id);
     public void deleteByIdTarea(Integer id);
 
 }

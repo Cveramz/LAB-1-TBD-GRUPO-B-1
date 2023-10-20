@@ -8,7 +8,7 @@ public interface VoluntarioRepository {
     public Voluntario createVol(Voluntario vol_in);
     public List<Voluntario> getVolById(Integer id);
     public List<Voluntario> findAllVoluntarios();
-    public Voluntario updateVol(Voluntario volUpdate, Integer id);
+    public String updateVol(Voluntario volUpdate, Integer id);
     public void deleteByIdVol(Integer id);
 
 }

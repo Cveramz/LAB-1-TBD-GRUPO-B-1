@@ -1,16 +1,21 @@
 package com.chileayuda.voluntariadobackend.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.chileayuda.voluntariadobackend.Models.Coordinador;
+import com.chileayuda.voluntariadobackend.Repositories.CoordinadorRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+
+@CrossOrigin
+@RestController
 public class CoordinadorService {
 
-    /* Capa de métodos del repositorio
-    @Autowired
-    private CoordinadorRepository coordinadorRepo;*/
+   private final com.chileayuda.voluntariadobackend.Repositories.CoordinadorRepository coordinadorRepository;
+
+    public CoordinadorService(CoordinadorRepository coordinadorRepository) {
+        this.coordinadorRepository = coordinadorRepository;
+    }
 
     /* Servicios disponibles */
 
@@ -20,31 +25,35 @@ public class CoordinadorService {
      * @param coordinador_in - un objeto que contiene los datos del coordinador;
      * @return - el coordinador creado y guardado en la base de datos;
      *
-    ------------------------------------------------------------------------------------------------------
-    public Coordinador createCoordinador(Coordinador coordinador_in) {
-        return coordinadorRepo.save(coordinador_in);
+    ------------------------------------------------------------------------------------------------------*/
+    @PostMapping("/coordinador")
+    @ResponseBody
+    public Coordinador createCoordinador(@RequestBody Coordinador coordinador_in) {
+        return coordinadorRepository.createCoordinador(coordinador_in);
     }
---*/
+
     /*--------------------------------------------------------------------------------------------------------
      * getCoordinadorById: método que obtiene un coordinador específico de la BD con su id;
      *
      * @param id_coordinador - id del coordinador;
      * @return - el coordinador buscado;
      *
-    ------------------------------------------------------------------------------------------------------
-    public Coordinador getCoordinadorById(Long id_coordinador) {
-        return coordinadorRepo.getById(id_coordinador);
+    --------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/coordinador/{id_coordinador}")
+    public List<Coordinador> getCoordinadorById(@PathVariable Integer id_coordinador) {
+        return coordinadorRepository.getCoordinadorById(id_coordinador);
     }
---*/
+
     /*--------------------------------------------------------------------------------------------------------
      * findAll: método que obtiene todos los coordinadores de la BD;
      *
      * @return - una lista con los coordinadores presentes en la BD;
      *
-    ----------------------------------------------------------------------------------------------------
-    public List<Coordinador> findAll() {
-        return coordinadorRepo.findAll();
-    }----*/
+    --------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/coordinador")
+    public List<Coordinador> getAllCoordinadores() {
+        return coordinadorRepository.findAllCoordinadores();
+    }
 
     /*--------------------------------------------------------------------------------------------------------
      * updateCoordinador: método que actualiza los datos de un coordinador en la BD;
@@ -52,29 +61,21 @@ public class CoordinadorService {
      * @param coordinadorUpdate - el objeto con el id del coordinador y los nuevos datos;
      * @return - los datos del coordinador actualizados;
      *
-    ---------------------------------------------------------------------------------------------------
-    public Coordinador updateCoordinador(Coordinador coordinadorUpdate) {
-        Coordinador presente = coordinadorRepo.findById(coordinadorUpdate.getId()).orElse(null);
-        if (presente != null) {
-            presente.setId(coordinadorUpdate.getId());
-            presente.setNombre(coordinadorUpdate.getNombre());
-            presente.setEmail(coordinadorUpdate.getEmail());
-            presente.setPassword(coordinadorUpdate.getPassword());
-            // Agregar código para actualizar otros atributos si es necesario
-            return coordinadorRepo.save(presente);
-        } else {
-            return null;
-        }
+    --------------------------------------------------------------------------------------------------------*/
+    @PutMapping("/coordinador/update/{id_coordinador}")
+    @ResponseBody
+    public String updateCoordinador(@RequestBody Coordinador coordinador, @PathVariable Integer id_coordinador) {
+        return coordinadorRepository.updateCoordinador(coordinador, id_coordinador);
     }
------*/
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdCoordinador: método que borra un coordinador de la BD;
      *
      * @param id_coordinador - id del coordinador a eliminar;
      *
-    --------------------------------------------------------------------------------------------------
-    public void deleteByIdCoordinador(Long id_coordinador) {
-        coordinadorRepo.deleteById(id_coordinador);
-    }------*/
+    --------------------------------------------------------------------------------------------------------*/
+    @DeleteMapping("/coordinador/{id_coordinador}")
+    public void borrar(@PathVariable Integer id_coordinador) {
+        coordinadorRepository.deleteByIdCoordinador(id_coordinador);
+    }
 }
 

@@ -8,6 +8,6 @@ public interface InstitucionRepository {
     public Institucion createInstitucion(Institucion institucion);
     public List<Institucion> getInstitucionById(Integer id);
     public List<Institucion> findAllInstituciones();
-    public Institucion updateInstitucion(Institucion institucionUpdate, Integer id);
+    public String updateInstitucion(Institucion institucionUpdate, Integer id);
     public void deleteInstitucionById(Integer id);
 }

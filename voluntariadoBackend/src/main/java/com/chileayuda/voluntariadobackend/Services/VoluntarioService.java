@@ -1,21 +1,21 @@
 package com.chileayuda.voluntariadobackend.Services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.chileayuda.voluntariadobackend.Models.Voluntario;
+import com.chileayuda.voluntariadobackend.Repositories.VoluntarioRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-
-@Service
+@CrossOrigin
+@RestController
 public class VoluntarioService{
 
-    /* Capa de metodos del repositorio
-    @Autowired
-    private VoluntarioRepository volRepo;
-*/
+    private final com.chileayuda.voluntariadobackend.Repositories.VoluntarioRepository voluntarioRepository;
+
+    public VoluntarioService(VoluntarioRepository voluntarioRepository) {
+        this.voluntarioRepository = voluntarioRepository;
+    }
+
     /* Servicios disponibles */
 
 
@@ -25,64 +25,55 @@ public class VoluntarioService{
      * @param vol_in - un objeto que contiene los datos del voluntario;
      * * @return - el voluntario creado y guardado en la base de datos;
      *
-      ---------------------------------------------------------------------------------------------------
-    public Voluntario createVol(Voluntario vol_in) {
-        return volRepo.save(vol_in);
-    }-----*/
-
+      -------------------------------------------------------*/
+    @PostMapping("/voluntario")
+    @ResponseBody
+    public Voluntario create(@RequestBody Voluntario voluntario) {
+        return voluntarioRepository.createVol(voluntario);
+    }
     /*--------------------------------------------------------------------------------------------------------
      * getVolById: metodod que obtiene un voluntario especifico de la BD con su id;
      *
      * @param id_inst - id del voluntario;
      * @return - el voluntario buscado;
      *
-     --------------------------------------------------------------------------------------------------
-    public Voluntario getVolById(Long id_vol){
-        return volRepo.getById(id_vol);
-    }------*/
-
+     -----------------------------------------------*/
+    @GetMapping("/voluntario/{id_voluntario}")
+    public List<Voluntario> getvoluntario(@PathVariable Integer id_voluntario) {
+        return voluntarioRepository.getVolById(id_voluntario);
+    }
     /*--------------------------------------------------------------------------------------------------------
      * findAll: metodo que obtiene todos los voluntarios de la BD;
      *
      * @return - una lista con los voluntarios presentes en la BD;
      *
-     ----------------------------------------------------------------------------------------------------
-    public List<Voluntario> findAll(){
-        return volRepo.findAll();
-    }----*/
-
+     --------------------------------------------------------------*/
+    @GetMapping("/voluntario")
+    public List<Voluntario> getAllvoluntarios() {
+        return voluntarioRepository.findAllVoluntarios();
+    }
     /*--------------------------------------------------------------------------------------------------------
      * updateVol: metodo que actualiza los datos de un voluntario en la BD;
      *
      * @param instUpdate - el objeto con el id del voluntario y los nuevos datos;
      * @return - los datos del voluntario actualizados;
      *
-     ---------------------------------------------------------------------------------------------------
-    public Voluntario updateVol(Voluntario volUpdate) {
-        Voluntario presente = volRepo.findById(volUpdate.getId()).orElse(null);
-        if (presente != null) {
-            presente.setId(volUpdate.getId());
-            presente.setNombre(volUpdate.getNombre());
-            presente.setEdad(volUpdate.getEdad());
-            presente.setEquipamiento(volUpdate.getEquipamiento());
-            presente.setEstado_salud(volUpdate.getEstado_salud());
-            presente.setDisponibilidad(volUpdate.getDisponibilidad());
-            presente.setEmail(volUpdate.getEmail());
-            presente.setPassword(volUpdate.getPassword());
-            return volRepo.save(presente);
-        } else {
-            return null;
-        }
+     ------------------------------------------------------------------*/
+    @PutMapping("/voluntario/update/{id_voluntario}")
+    @ResponseBody
+    public String updatevoluntario(@RequestBody Voluntario voluntario, @PathVariable Integer id_voluntario) {
+        return voluntarioRepository.updateVol(voluntario, id_voluntario);
     }
------*/
-
     /*--------------------------------------------------------------------------------------------------------
      * deleteByIdVol: metodo que borra un voluntario de la BD;
      *
      * @param id - id del voluntario a eliminar;
      *
-     -----------------------------------------------------------------------------------------------------
-    public void deleteByIdVol(Long id) {
-        volRepo.deleteById(id);
-    }---*/
+     --------------------------------------------*/
+
+    @DeleteMapping("/voluntario/{id_voluntario}")
+    public void borrar(@PathVariable Integer id_voluntario) {
+        voluntarioRepository.deleteByIdVol(id_voluntario);
+    }
+
 }

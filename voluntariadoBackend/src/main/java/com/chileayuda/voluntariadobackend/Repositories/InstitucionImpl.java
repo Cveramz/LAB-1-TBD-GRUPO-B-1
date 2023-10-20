@@ -86,7 +86,7 @@ public class InstitucionImpl implements InstitucionRepository {
      *
      --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Institucion updateInstitucion(Institucion institucionUpdate, Integer id_institucion) {
+    public String updateInstitucion(Institucion institucionUpdate, Integer id_institucion) {
         try(Connection connection = sql2o.open()) {
             connection.createQuery("UPDATE Institucion " +
                             "SET id_coordinador =:id_coordinador, nombre_institucion =:nombre_institucion, telefono =:telefono, ubicacion_institucion =:ubicacionInstitucion" +
@@ -97,7 +97,7 @@ public class InstitucionImpl implements InstitucionRepository {
                     .addParameter("telefono", institucionUpdate.getTelefono())
                     .addParameter("ubicacion_institucion", institucionUpdate.getUbicacion_institucion())
                     .executeUpdate();
-            return institucionUpdate;
+            return "acutalizado";
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;
