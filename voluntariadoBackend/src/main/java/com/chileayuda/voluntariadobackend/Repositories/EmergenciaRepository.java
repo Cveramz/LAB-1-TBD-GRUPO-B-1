@@ -11,6 +11,7 @@ public interface EmergenciaRepository {
     public Emergencia createEmergencia(Emergencia emergencia_in);
     public List<Emergencia> getEmergenciaById(Integer id);
     public List<Emergencia> findAllEmergency();
+    public List<Emergencia> findAllCompletedEmergency();
     public String updateEmergencia(Emergencia emergenciaUpdate, Integer id);
     public void deleteByIdEmergencia(Integer id);
 }

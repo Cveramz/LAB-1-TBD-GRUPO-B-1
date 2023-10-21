@@ -54,6 +54,20 @@ public class EmergenciaService {
         public List<Emergencia> getAllEmergencias() {
         return emergenciaRepository.findAllEmergency();
     }
+
+
+    /*--------------------------------------------------------------------------------------------------------
+     * findAllCompletas: método que obtiene todas las emergencias completas de la BD;
+     *
+     * @return - una lista con las emergencias completas en la BD;
+     *
+    --------------------------------------------------------------------------------------------------------*/
+    @GetMapping("/emergencia/completa")
+    public List<Emergencia> getAllCompletas(){
+        return emergenciaRepository.findAllCompletedEmergency();
+    }
+
+
     /*--------------------------------------------------------------------------------------------------------
      * updateEmergencia: método que actualiza los datos de una emergencia en la BD;
      *

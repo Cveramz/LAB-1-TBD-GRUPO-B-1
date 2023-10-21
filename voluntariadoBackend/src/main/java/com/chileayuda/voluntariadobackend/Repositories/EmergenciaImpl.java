@@ -78,8 +78,37 @@ public class EmergenciaImpl implements EmergenciaRepository {
             return null;
         }
 
-
     }
+
+    /*--------------------------------------------------------------------------------------------------------
+     * findAll: método que obtiene todas las emergencias de la BD;
+     *
+     * @return - una lista con las emergencias presentes en la BD;
+     *
+    -------------------------------------------------------------------------------------------------------*/
+    @Override
+    public List<Emergencia> findAllCompletedEmergency() {
+        try (Connection connection = sql2o.open()) {
+            String sql = "SELECT e.* " +
+                    "FROM Emergencia e " +
+                    "WHERE e.id_emergencia NOT IN ( " +
+                    "  SELECT t.id_emergencia " +
+                    "  FROM tarea t " +
+                    "  LEFT JOIN estado_tarea et ON t.id_estado_tarea = et.id_estado_tarea " +
+                    "  WHERE et.estado <> 'Completa' " +
+                    ")";
+
+            return connection.createQuery(sql)
+                    .executeAndFetch(Emergencia.class);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
+
+
+
+
 
     /*--------------------------------------------------------------------------------------------------------
      * updateEmergencia: método que actualiza los datos de una emergencia en la BD;
