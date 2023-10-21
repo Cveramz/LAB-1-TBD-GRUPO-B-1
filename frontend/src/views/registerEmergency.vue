@@ -29,8 +29,8 @@ const submitForm = () => {
               <label for="nombre-emergencia">Nombre de Emergencia:</label>
               <input type="text" id="nombre-emergencia" v-model="nombreEmergencia" required>
   
-              <label for="descripcion">Descripción:</label>
-              <textarea id="descripcion" v-model="descripcion"></textarea>
+              <label for="descripcion">Descripción y requisitos:</label>
+              <textarea id="descripcion" v-model="descripcion" placeholder="Detalle su emergencia e ingrese una lista de requisitos"></textarea>
   
               <label for="estado">Estado:</label>
               <select id="estado" v-model="estado">
