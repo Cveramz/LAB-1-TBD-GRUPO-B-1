@@ -89,3 +89,103 @@ CREATE TABLE tarea_habilidad(
     id_tarea BIGINT REFERENCES tarea(id_tarea),
     id_habilidad BIGINT REFERENCES habilidad(id_habilidad)
 );
+
+
+-- TRIGGERS 
+
+-- Trigger para emergencia
+
+-- operación INSERT
+CREATE OR REPLACE FUNCTION emergencia_insert_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO emergencia_log (accion, fecha, id_emergencia, id_institucion, tipo, ubicacion, equipamiento_necesario, titulo, descripcion)
+  VALUES ('INSERT', NOW(), NEW.id_emergencia, NEW.id_institucion, NEW.tipo, NEW.ubicacion, NEW.equipamiento_necesario, NEW.titulo, NEW.descripcion);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- operación UPDATE
+CREATE OR REPLACE FUNCTION emergencia_update_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO emergencia_log (accion, fecha, id_emergencia, id_institucion, tipo, ubicacion, equipamiento_necesario, titulo, descripcion)
+  VALUES ('UPDATE', NOW(), NEW.id_emergencia, NEW.id_institucion, NEW.tipo, NEW.ubicacion, NEW.equipamiento_necesario, NEW.titulo, NEW.descripcion);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- operación DELETE
+CREATE OR REPLACE FUNCTION emergencia_delete_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO emergencia_log (accion, fecha, id_emergencia, id_institucion, tipo, ubicacion, equipamiento_necesario, titulo, descripcion)
+  VALUES ('DELETE', NOW(), OLD.id_emergencia, OLD.id_institucion, OLD.tipo, OLD.ubicacion, OLD.equipamiento_necesario, OLD.titulo, OLD.descripcion);
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+-- para cada operación
+CREATE TRIGGER emergencia_insert
+AFTER INSERT ON emergencia
+FOR EACH ROW
+EXECUTE FUNCTION emergencia_insert_trigger();
+
+CREATE TRIGGER emergencia_update
+AFTER UPDATE ON emergencia
+FOR EACH ROW
+EXECUTE FUNCTION emergencia_update_trigger();
+
+CREATE TRIGGER emergencia_delete
+AFTER DELETE ON emergencia
+FOR EACH ROW
+EXECUTE FUNCTION emergencia_delete_trigger();
+
+
+-- Trigger para voluntario:
+
+-- operación INSERT 
+CREATE OR REPLACE FUNCTION voluntario_insert_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO voluntario_log (accion, fecha, id_voluntario, nombre_voluntario, edad, equipamiento, estado_salud, disponibilidad, email_voluntario)
+  VALUES ('INSERT', NOW(), NEW.id_voluntario, NEW.nombre_voluntario, NEW.edad, NEW.equipamiento, NEW.estado_salud, NEW.disponibilidad, NEW.email_voluntario);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- operación UPDATE
+CREATE OR REPLACE FUNCTION voluntario_update_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO voluntario_log (accion, fecha, id_voluntario, nombre_voluntario, edad, equipamiento, estado_salud, disponibilidad, email_voluntario)
+  VALUES ('UPDATE', NOW(), NEW.id_voluntario, NEW.nombre_voluntario, NEW.edad, NEW.equipamiento, NEW.estado_salud, NEW.disponibilidad, NEW.email_voluntario);
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- operación DELETE
+CREATE OR REPLACE FUNCTION voluntario_delete_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO voluntario_log (accion, fecha, id_voluntario, nombre_voluntario, edad, equipamiento, estado_salud, disponibilidad, email_voluntario)
+  VALUES ('DELETE', NOW(), OLD.id_voluntario, OLD.nombre_voluntario, OLD.edad, OLD.equipamiento, OLD.estado_salud, OLD.disponibilidad, OLD.email_voluntario);
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+-- para cada operación
+CREATE TRIGGER voluntario_insert
+AFTER INSERT ON voluntario
+FOR EACH ROW
+EXECUTE FUNCTION voluntario_insert_trigger();
+
+CREATE TRIGGER voluntario_update
+AFTER UPDATE ON voluntario
+FOR EACH ROW
+EXECUTE FUNCTION voluntario_update_trigger();
+
+CREATE TRIGGER voluntario_delete
+AFTER DELETE ON voluntario
+FOR EACH ROW
+EXECUTE FUNCTION voluntario_delete_trigger();
