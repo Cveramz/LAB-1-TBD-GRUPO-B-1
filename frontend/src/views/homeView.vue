@@ -76,7 +76,7 @@ export default {
         "password": this.password
       };
       try {
-        const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + `/usuario/login/${this.username}/${this.password}`);
+        const respuesta = await axios.get(import.meta.env.VITE_BASE_URL + `/coordinador/login/${this.username}/${this.password}`);
         //Para redireccionar hacia el sector de tareas
         if(respuesta.data){
           if(respuesta.data.length === 0){
@@ -111,13 +111,13 @@ export default {
       if(this.passwordRegister == this.passwordRegisterConfirmation){
         if(this.usernameRegister != "" & this.passwordRegister != ""){
           const nuevo_usuario = {
-            nombre_usuario: quitarArroba(this.usernameRegister),
-            email: this.usernameRegister,
-            password: this.passwordRegister,
-            id: generarNumeroAleatorio(),
+            nombre_coordinador: quitarArroba(this.usernameRegister),
+            email_coordinador: this.usernameRegister,
+            password_coordinador: this.passwordRegister,
+            id_coordinador: generarNumeroAleatorio(),
           }
           try {
-            const registro = await axios.post(import.meta.env.VITE_BASE_URL + "/usuario", nuevo_usuario);
+            const registro = await axios.post(import.meta.env.VITE_BASE_URL + "/coordinador", nuevo_usuario);
             alert("Usuario creado con exito");
             this.register = !this.register;
           } catch(error){
