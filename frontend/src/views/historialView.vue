@@ -11,8 +11,9 @@ export default {
     return {
       tipo: "",
       descripcion: "",
-      emergencies: [],
+      emergencies: [{titulo: "aa", nombre: "aaa", edad: "aaaa"}],
       tasks: [],
+      modal: false,
     }
   },
   
@@ -32,6 +33,13 @@ export default {
         } catch (error){
           alert("error en conectar al servidor")
         }
+    },
+    openModal(){
+      this.modal = !this.modal;
+      console.log(this.modal);
+    },
+    closeModal() {
+      this.modal = false;
     },
   }
 }
@@ -60,6 +68,9 @@ export default {
                 <th class="tableRow">
                   Voluntarios participantes
                 </th>
+                <th class="tableRow">
+                  detalles
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -67,6 +78,7 @@ export default {
                 <td class="bodyRow">{{ item.titulo }}</td>
                 <td class="bodyRow">{{ item.nombre }}</td>
                 <td class="bodyRow">{{ item.edad }}</td>
+                <td class="bodyRowDetail" @click="openModal">Ver detalles</td>
               </tr>
             </tbody>
           </table>
@@ -76,6 +88,13 @@ export default {
         </div>
       </div>
     </div>
+    <div class="overlay" v-if="modal" @click="closeModal"></div>
+    <div class="modal" v-if="modal">
+      <div class="modalContent">
+        Hola carlitos
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -97,6 +116,7 @@ h2 {
   margin-left: 70px;
   padding-top: 110px;
 }
+
 
 .content {
   display: flex;
@@ -142,7 +162,14 @@ h2 {
   text-align: left;
   height: 40px;
 }
-
+.bodyRowDetail {
+  text-decoration: underline;
+  color: #0288D1;
+  border-bottom: #d4d4d4 1px solid !important;
+  text-align: left;
+  height: 40px;
+  cursor: pointer;
+}
 .description {
   box-sizing: border-box;
   background-color: #fafafa;
@@ -169,5 +196,33 @@ h2 {
   width: 100%;
   transition: background-color 0.2s;
   margin-bottom: 10px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fafafa;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  max-height: 200px;
+  z-index: 2;
+}
+
+.modalContent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
