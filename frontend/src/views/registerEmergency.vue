@@ -1,6 +1,5 @@
 <script setup>
 
-import { ref } from 'vue'
 import TopBar from '../components/TopBar.vue';
 import SideBar from "../components/SideBar.vue";
 </script>
@@ -9,17 +8,22 @@ import SideBar from "../components/SideBar.vue";
 export default {
   data() {
     return {
-      nombreEmergencia: '',
+      titulo: '',
+      tipo: '',
+      ubicacion: '',
       descripcion: '',
-      estado: 'no completado'
+      equipamiento_necesario: '',
     };
   },
   methods: {
     submitForm() {
       // Enviar formulario
-      console.log('Nombre de Emergencia:', this.nombreEmergencia);
-      console.log('Descripción:', this.descripcion);
-      console.log('Estado:', this.estado);
+      console.log('Nombre de Emergencia:', this.titulo);
+      console.log('Tipo de emergencia:', this.tipo);
+      console.log('Ubicación:', this.ubicacion);
+      console.log('Descripción y requisitos:', this.descripcion);
+      console.log('Equipamiento necesario:', this.equipamiento_necesario);
+
     }
   }
 }
@@ -39,16 +43,20 @@ export default {
             <div class="card" style="margin-top: 20px;">
               <form @submit.prevent="submitForm">
                 <label for="nombre-emergencia">Nombre de Emergencia:</label>
-                <input type="text" id="nombre-emergencia" v-model="nombreEmergencia" required>
+                <input type="text" id="nombre-emergencia" v-model="titulo" required>
+
+                <label for="tipo-emergencia">Tipo de emergencia:</label>
+                <input type="text" id="tipo-emergencia" v-model="tipo" required>
+
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" id="ubicacion" v-model="ubicacion" required>
+
     
                 <label for="descripcion">Descripción y requisitos:</label>
                 <textarea id="descripcion" v-model="descripcion" placeholder="Detalle su emergencia e ingrese una lista de requisitos"></textarea>
-    
-                <label for="estado">Estado:</label>
-                <select id="estado" v-model="estado">
-                  <option value="completado">Completado</option>
-                  <option value="no completado">No Completado</option>
-                </select>
+
+                <label for="equipamiento">Equipamiento necesario:</label>
+                <textarea id="equipamiento" v-model="equipamiento_necesario" placeholder="Detalle el equipamiento necesario"></textarea>
     
                 <button type="submit">Registrar Emergencia</button>
               </form>
