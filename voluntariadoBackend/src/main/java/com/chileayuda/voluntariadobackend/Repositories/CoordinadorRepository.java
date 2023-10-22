@@ -11,4 +11,6 @@ public interface CoordinadorRepository {
     public List<Coordinador> findAllCoordinadores();
     public String  updateCoordinador(Coordinador coordinadorUpdate,Integer id_coordinador);
     public void deleteByIdCoordinador(Integer id);
+
+    public List<Coordinador> login(String email_coordinador, String password_coordinador);
 }

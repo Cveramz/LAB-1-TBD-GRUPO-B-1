@@ -77,5 +77,11 @@ public class CoordinadorService {
     public void borrar(@PathVariable Integer id_coordinador) {
         coordinadorRepository.deleteByIdCoordinador(id_coordinador);
     }
+
+    //Login
+    @GetMapping("/coordinador/login/{email_coordinador}/{password_coordinador}")
+    public List<Coordinador> login(@PathVariable String email_coordinador, @PathVariable String password_coordinador){
+        return coordinadorRepository.login(email_coordinador, password_coordinador);
+    }
 }
 

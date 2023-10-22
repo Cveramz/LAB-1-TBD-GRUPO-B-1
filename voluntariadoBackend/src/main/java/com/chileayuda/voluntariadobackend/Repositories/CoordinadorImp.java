@@ -121,5 +121,19 @@ public class CoordinadorImp implements CoordinadorRepository {
             System.out.println(exception.getMessage());
         }
     }
+
+    @Override
+    public List<Coordinador> login(String email_coordinador, String password_coordinador){
+        try(Connection connection = sql2o.open()){
+            return connection.createQuery("SELECT * FROM usuario WHERE email_coordinador =:email_coordinador AND password_coordinador =:password_coordinador")
+                    .addParameter("email_coordinador", email_coordinador)
+                    .addParameter("password_coordinador", password_coordinador)
+                    .executeAndFetch(Coordinador.class);
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+            return null;
+        }
+
+    }
 }
 
