@@ -189,3 +189,29 @@ CREATE TRIGGER voluntario_delete
 AFTER DELETE ON voluntario
 FOR EACH ROW
 EXECUTE FUNCTION voluntario_delete_trigger();
+
+CREATE TABLE emergencia_log (
+                                id SERIAL PRIMARY KEY,
+                                accion VARCHAR(50),
+                                fecha TIMESTAMP,
+                                id_emergencia BIGINT,
+                                id_institucion BIGINT,
+                                tipo VARCHAR(50),
+                                ubicacion VARCHAR(50),
+                                equipamiento_necesario VARCHAR(50),
+                                titulo VARCHAR(50),
+                                descripcion VARCHAR(100)
+);
+
+CREATE TABLE voluntario_log (
+                                id SERIAL PRIMARY KEY,
+                                accion VARCHAR(50),
+                                fecha TIMESTAMP,
+                                id_voluntario BIGINT,
+                                nombre_voluntario VARCHAR(50),
+                                edad INT,
+                                equipamiento VARCHAR(100),
+                                estado_salud BOOLEAN,
+                                disponibilidad BOOLEAN,
+                                email_voluntario VARCHAR(50)
+);
