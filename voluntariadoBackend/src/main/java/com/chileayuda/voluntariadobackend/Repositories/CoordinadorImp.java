@@ -25,17 +25,17 @@ public class CoordinadorImp implements CoordinadorRepository {
      *
     --------------------------------------------------------------------------------------------------------*/
     @Override
-    public Coordinador createCoordinador (Coordinador coordinador_in) {
+    public Coordinador createCoordinador (Coordinador coordinador) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO coordinador_in (id_coordinador,nombre_coordinador,email_coordinador,password_coordinador)"+
+            String sql = "INSERT INTO coordinador (id_coordinador, nombre_coordinador, email_coordinador, password_coordinador) " +
                     "VALUES (:id_coordinador, :nombre_coordinador, :email_coordinador, :password_coordinador)";
             connection.createQuery(sql, true)
-                    .addParameter("id_coordinador", coordinador_in.getId_coordinador())
-                    .addParameter("nombre_coordinador", coordinador_in.getNombre_coordinador())
-                    .addParameter("email_coordinador", coordinador_in.getEmail_coordinador())
-                    .addParameter("password_coordinador", coordinador_in.getPassword_coordinador())
+                    .addParameter("id_coordinador", coordinador.getId_coordinador())
+                    .addParameter("nombre_coordinador", coordinador.getNombre_coordinador())
+                    .addParameter("email_coordinador", coordinador.getEmail_coordinador())
+                    .addParameter("password_coordinador", coordinador.getPassword_coordinador())
                     .executeUpdate();
-            return coordinador_in;
+            return coordinador;
         } catch (Exception exception){
             System.out.println(exception.getMessage());
             return null;
@@ -125,7 +125,7 @@ public class CoordinadorImp implements CoordinadorRepository {
     @Override
     public List<Coordinador> login(String email_coordinador, String password_coordinador){
         try(Connection connection = sql2o.open()){
-            return connection.createQuery("SELECT * FROM usuario WHERE email_coordinador =:email_coordinador AND password_coordinador =:password_coordinador")
+            return connection.createQuery("SELECT * FROM coordinador WHERE email_coordinador =:email_coordinador AND password_coordinador =:password_coordinador")
                     .addParameter("email_coordinador", email_coordinador)
                     .addParameter("password_coordinador", password_coordinador)
                     .executeAndFetch(Coordinador.class);
