@@ -16,10 +16,13 @@ function handleOpen() {
       <div :class="['buttonText', { 'buttonTextOpened': opened }]">Menú</div>
     </div>
     <div class="menuButtons"> 
-      
       <router-link to="/registerEmergency" :class="['button', { 'buttonOpened': opened }]"> 
         <img class="imgWhiteFilter" src="../assets/add.svg" height="30" />
         <div :class="['buttonText', { 'buttonTextOpened': opened }]">Crear emergencia</div>
+      </router-link>
+      <router-link to="/allEmergencies" :class="['button', { 'buttonOpened': opened }]"> 
+        <img class="imgWhiteFilter" src="../assets/folder.svg" height="30" />
+        <div :class="['buttonText', { 'buttonTextOpened': opened }]">Todas las emergencias</div>
       </router-link>
       <router-link to="/history" :class="['button', { 'buttonOpened': opened }]"> 
         <img class="imgWhiteFilter" src="../assets/history.svg" height="30" />

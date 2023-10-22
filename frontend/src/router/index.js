@@ -24,7 +24,11 @@ const router = createRouter({
       name: 'registrarEmergencia',
       component: () => import('../views/registerEmergency.vue'),
     },
-    
+    {
+      path: '/allEmergencies',
+      name: 'todasLasEmergencias',
+      component: () => import('../views/allEmergencies.vue'),
+    },
   ],
 });
 
