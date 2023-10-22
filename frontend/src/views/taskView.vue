@@ -38,7 +38,8 @@ export default {
       };
 
       try {
-        const respuesta = await axios.post(import.meta.env.VITE_BASE_URL + "/tarea", auxObject);
+        const apiUrl = import.meta.env.VITE_BASE_URL + "/tarea";
+        const respuesta = await axios.post(apiUrl, auxObject);
         console.log(respuesta.data); 
         alert("La tarea se ha registrado correctamente");
       }catch(error){

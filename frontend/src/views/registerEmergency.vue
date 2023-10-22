@@ -6,6 +6,11 @@ import axios from 'axios';
 </script>
 
 <script>
+
+function generarNumeroAleatorio() {
+  return Math.floor(Math.random() * 10000001);
+}
+
 export default {
   data() {
     return {
@@ -18,23 +23,23 @@ export default {
   },
   methods: {
     async submitForm() {
-      /*
-      try {
-        const response = await axios.post('/emergencia', {
-          id: null, // Puedes enviar null o dejar este campo en blanco si el backend lo maneja automáticamente
-          idInstitucion: null, // Puedes enviar null o dejar este campo en blanco si el backend lo maneja automáticamente
+      const auxObject = {
+          id: generarNumeroAleatorio(),
+          idInstitucion: null,
           tipo: this.tipo,
           ubicacion: this.ubicacion,
           equipamiento_necesario: this.equipamiento_necesario,
           titulo: this.titulo,
           descripcion: this.descripcion,
-        });
-
-        // Aquí puedes manejar la respuesta del servidor si es necesario
+        };
+        const apiUrl = import.meta.env.VITE_BASE_URL + "/emergencia";
+      try {
+        const response = await axios.post(apiUrl, auxObject);
         console.log('Respuesta del servidor:', response.data);
       } catch (error) {
+        console.error(auxObject);
         console.error('Error al enviar el formulario:', error);
-      }*/
+      }
     }
   }
 }
