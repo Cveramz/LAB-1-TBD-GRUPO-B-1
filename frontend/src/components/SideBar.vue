@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 const opened = ref(false)
 
 
@@ -16,7 +16,16 @@ function handleOpen() {
       <div :class="['buttonText', { 'buttonTextOpened': opened }]">Menú</div>
     </div>
     <div class="menuButtons"> 
-    </div>
+      
+      <router-link to="/registerEmergency" :class="['button', { 'buttonOpened': opened }]"> 
+        <img class="imgWhiteFilter" src="../assets/add.svg" height="30" />
+        <div :class="['buttonText', { 'buttonTextOpened': opened }]">Crear emergencia</div>
+      </router-link>
+      <router-link to="/history" :class="['button', { 'buttonOpened': opened }]"> 
+        <img class="imgWhiteFilter" src="../assets/history.svg" height="30" />
+        <div :class="['buttonText', { 'buttonTextOpened': opened }]">Emergencias finalizadas</div>
+      </router-link>
+  </div>
     <router-link to="/" :class="['button', { 'buttonOpened': opened }]"> 
       <img class="imgWhiteFilter" src="../assets/logout.svg" height="30" />
       <div :class="['buttonText', { 'buttonTextOpened': opened }]">Salir del portal</div>

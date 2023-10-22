@@ -10,9 +10,30 @@ export default {
   data() {
     return {
       tipo: "",
-      descripcion: ""
+      descripcion: "",
+      emergencies: [],
+      tasks: [],
     }
   },
+  
+  methods: {
+    async getCompletedEmergencies(){
+      try {
+        const res = await axios(import.meta.env.VITE_BASE_URL + `/emergencia/completa`)
+        this.emergencies = res.data;
+        } catch (error){
+          alert("error en conectar al servidor")
+        }
+    },
+    async getTareas(){
+      try {
+        const res = await axios(import.meta.env.VITE_BASE_URL + `/tarea`)
+        this.tasks = res.data;
+        } catch (error){
+          alert("error en conectar al servidor")
+        }
+    },
+  }
 }
 </script>
 
@@ -26,7 +47,7 @@ export default {
       <p>A continuación, se presenta un historial de las emergencias finalizadas
       </p>
       <div class="card" style="margin-top: 20px;">
-        <div> 
+        <div v-if="emergencies.length !== 0"> 
           <table style="width: 100%">
             <thead>
               <tr>
@@ -42,20 +63,17 @@ export default {
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: #999999 1px solid">
-                <td class="bodyRow">
-                  ejemplo
-                </td>
-                <td class="bodyRow">
-                  ejemplo
-                </td>
-                <td class="bodyRow">
-                  ejemplo
-                </td>
+              <tr v-for="item in emergencies" :key="item.id" style="border-bottom: #999999 1px solid">
+                <td class="bodyRow">{{ item.titulo }}</td>
+                <td class="bodyRow">{{ item.nombre }}</td>
+                <td class="bodyRow">{{ item.edad }}</td>
               </tr>
             </tbody>
           </table>
-        </div>        
+        </div>      
+        <div v-else>   
+          No se encuentran emergencias.
+        </div>
       </div>
     </div>
   </div>
