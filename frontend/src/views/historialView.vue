@@ -11,9 +11,10 @@ export default {
     return {
       tipo: "",
       descripcion: "",
-      emergencies: [{titulo: "aa", nombre: "aaa", edad: "aaaa"}],
+      emergencies: [{titulo: 2398, nombre: "aaa", edad: "aaaa"}],
       tasks: [],
       modal: false,
+      actualEmergency: [],
     }
   },
   
@@ -34,11 +35,22 @@ export default {
           alert("error en conectar al servidor")
         }
     },
-    openModal(){
-      this.modal = !this.modal;
-      console.log(this.modal);
+    // HAY QUE PASARLE EL ID EMERGENCIA, PERO AHORA LE ESTOY PASANDO EL TITULO PARA PROBAR
+    async openModal(idEmergencia) {
+      const apiUrl = import.meta.env.VITE_BASE_URL + `/emergencia/${idEmergencia}`
+      console.log(apiUrl);
+      try {
+        const res = await axios(apiUrl);
+        this.actualEmergency = res.data;
+        this.modal = !this.modal;
+      } catch (error){
+        alert("error en conectar al servidor")
+        this.actualEmergency = ["prueba"];
+        this.modal = !this.modal;
+      }
     },
     closeModal() {
+      console.log(this.actualEmergency);
       this.modal = false;
     },
   }
@@ -78,7 +90,7 @@ export default {
                 <td class="bodyRow">{{ item.titulo }}</td>
                 <td class="bodyRow">{{ item.nombre }}</td>
                 <td class="bodyRow">{{ item.edad }}</td>
-                <td class="bodyRowDetail" @click="openModal">Ver detalles</td>
+                <td class="bodyRowDetail" @click="openModal(item.titulo)">Ver detalles</td>
               </tr>
             </tbody>
           </table>
