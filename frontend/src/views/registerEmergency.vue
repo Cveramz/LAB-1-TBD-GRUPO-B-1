@@ -23,23 +23,26 @@ const submitForm = () => {
       <div class="view">
         <div class="content">
           <h1>Crear Emergencia</h1>
+          <p>A continuación rellene la siguiente información</p>
           <div class="form-container">
-            <h2>A continuación rellene la siguiente información</h2>
-            <form @submit.prevent="submitForm">
-              <label for="nombre-emergencia">Nombre de Emergencia:</label>
-              <input type="text" id="nombre-emergencia" v-model="nombreEmergencia" required>
-  
-              <label for="descripcion">Descripción y requisitos:</label>
-              <textarea id="descripcion" v-model="descripcion" placeholder="Detalle su emergencia e ingrese una lista de requisitos"></textarea>
-  
-              <label for="estado">Estado:</label>
-              <select id="estado" v-model="estado">
-                <option value="completado">Completado</option>
-                <option value="no completado">No Completado</option>
-              </select>
-  
-              <button type="submit">Registrar Emergencia</button>
-            </form>
+            
+            <div class="card" style="margin-top: 20px;">
+              <form @submit.prevent="submitForm">
+                <label for="nombre-emergencia">Nombre de Emergencia:</label>
+                <input type="text" id="nombre-emergencia" v-model="nombreEmergencia" required>
+    
+                <label for="descripcion">Descripción y requisitos:</label>
+                <textarea id="descripcion" v-model="descripcion" placeholder="Detalle su emergencia e ingrese una lista de requisitos"></textarea>
+    
+                <label for="estado">Estado:</label>
+                <select id="estado" v-model="estado">
+                  <option value="completado">Completado</option>
+                  <option value="no completado">No Completado</option>
+                </select>
+    
+                <button type="submit">Registrar Emergencia</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -64,6 +67,19 @@ const submitForm = () => {
   width: 100%;
   margin: auto !important;
   max-width: 1200px;
+}
+
+
+.card {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  max-width: 800px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 h1 {
