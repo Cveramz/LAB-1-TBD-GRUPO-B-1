@@ -1,18 +1,28 @@
 <script setup>
+
 import { ref } from 'vue'
 import TopBar from '../components/TopBar.vue';
 import SideBar from "../components/SideBar.vue";
+</script>
+<script>
 
-const nombreEmergencia = ref('');
-const descripcion = ref('');
-const estado = ref('no completado');
-
-const submitForm = () => {
-  // Enviar formulario
-  console.log('Nombre de Emergencia:', nombreEmergencia.value);
-  console.log('Descripción:', descripcion.value);
-  console.log('Estado:', estado.value);
-};
+export default {
+  data() {
+    return {
+      nombreEmergencia: '',
+      descripcion: '',
+      estado: 'no completado'
+    };
+  },
+  methods: {
+    submitForm() {
+      // Enviar formulario
+      console.log('Nombre de Emergencia:', this.nombreEmergencia);
+      console.log('Descripción:', this.descripcion);
+      console.log('Estado:', this.estado);
+    }
+  }
+}
 </script>
 
 
