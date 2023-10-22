@@ -11,7 +11,7 @@ export default {
     return {
       tipo: "",
       descripcion: "",
-      emergencies: [{titulo: 2398, nombre: "aaa", edad: "aaaa"}],
+      emergencies: [],
       tasks: [],
       modal: false,
       actualEmergency: [],
@@ -31,6 +31,7 @@ export default {
       try {
         const res = await axios(import.meta.env.VITE_BASE_URL + `/tarea`)
         this.tasks = res.data;
+        console.log("AAAA")
         } catch (error){
           alert("error en conectar al servidor")
         }
@@ -53,6 +54,9 @@ export default {
       console.log(this.actualEmergency);
       this.modal = false;
     },
+  },
+  mounted() {
+    this.getCompletedEmergencies();
   }
 }
 </script>

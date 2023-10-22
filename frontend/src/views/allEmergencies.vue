@@ -19,7 +19,7 @@ export default {
   },
   
   methods: {
-    async getCompletedEmergencies(){
+    async getAllEmergencies(){
       try {
         const res = await axios(import.meta.env.VITE_BASE_URL + `/emergencia`)
         this.emergencies = res.data;
@@ -53,6 +53,9 @@ export default {
       console.log(this.actualEmergency);
       this.modal = false;
     },
+  },
+  mounted() {
+    this.getAllEmergencies();
   }
 }
 </script>
