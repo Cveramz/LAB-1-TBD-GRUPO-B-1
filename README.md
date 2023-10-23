@@ -8,7 +8,7 @@
 
 ## TECNOLOGÍAS Y VERSIÓN
 
- El presente proyecto utiliza las tecnologías por parte de backend y base de datos: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
+ El presente proyecto utiliza las tecnologías por parte de Backend y Base de Datos: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
  Por parte de Frontend Vue 3 y Axios.
 
 ## EjECUCIÓN BASE DE DATOS
