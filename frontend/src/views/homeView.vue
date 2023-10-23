@@ -39,7 +39,7 @@ import axios from 'axios';
 //Redireccionamientos
 //Usuario normal
 function redireccionarATareas() {
-  window.location.href = '/tasks';
+  window.location.href = '/allEmergencies';
 }
 
 function isEmail(email){
