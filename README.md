@@ -8,8 +8,16 @@
 
 ## TECNOLOGÍAS Y VERSIÓN
 
- El presente proyecto utiliza las tecnologías: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
+ El presente proyecto utiliza las tecnologías por parte de backend y base de datos: Java (17) con su framework Spring boot Maven (2.7.16) y postgreSQL.
+ Por parte de Frontend Vue 3 y Axios.
 
+## EjECUCIÓN BASE DE DATOS
+
+Abrir PgAdmin y seleccionar un servidor, dentro de este crear una base de datos para luego abrir la QueryTool (o herramienta de consulta) para ejecutar los scripts:
+
+1. Abrir "CreatedbControl2.sql", en este caso ya está creada la base de datos por lo que se puede eliminar la primera linea para evitar problemas y luego ejecutar.
+
+2. A modo de prueba se puede poblar la base de datos con el archivo "loadDataControl2.sql" y ejecutar.
 
 ## EJECUCIÓN BACKEND
 
