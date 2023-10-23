@@ -73,7 +73,7 @@ export default {
                   Ubicación
                 </th>
                 <th class="tableRow">
-                  detalles
+                  Detalles
                 </th>
               </tr>
             </thead>
@@ -105,7 +105,6 @@ export default {
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

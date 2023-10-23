@@ -25,7 +25,7 @@ public class EmergenciaImpl implements EmergenciaRepository {
     @Override
     public Emergencia createEmergencia (Emergencia emergencia_in) {
         try (Connection connection = sql2o.open()) {
-            String sql = "INSERT TO emergencia_in (id_emergencia,id_institucion, tipo,ubicacion,equipamiento_necesario, titulo, descripcion)" +
+            String sql = "INSERT INTO emergencia (id_emergencia,id_institucion, tipo,ubicacion,equipamiento_necesario, titulo, descripcion)" +
                     "VALUES (:id_emergencia, :id_institucion, :tipo, :ubicacion, :equipamiento_necesario, :titulo, :descripcion)";
             connection.createQuery(sql, true)
                     .addParameter("id_emergencia", emergencia_in.getIdEmergencia())

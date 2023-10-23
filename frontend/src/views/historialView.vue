@@ -21,17 +21,8 @@ export default {
   methods: {
     async getCompletedEmergencies(){
       try {
-        const res = await axios(import.meta.env.VITE_BASE_URL + `/emergencia/completa`)
+        const res = await axios(import.meta.env.VITE_BASE_URL + `/completadas`)
         this.emergencies = res.data;
-        } catch (error){
-          alert("error en conectar al servidor")
-        }
-    },
-    async getTareas(){
-      try {
-        const res = await axios(import.meta.env.VITE_BASE_URL + `/tarea`)
-        this.tasks = res.data;
-        console.log("AAAA")
         } catch (error){
           alert("error en conectar al servidor")
         }
@@ -78,22 +69,18 @@ export default {
                   Nombre Emergencia
                 </th>
                 <th class="tableRow">
-                  Tareas totales
+                  Ubicación
                 </th>
                 <th class="tableRow">
-                  Voluntarios participantes
-                </th>
-                <th class="tableRow">
-                  detalles
+                  Detalles
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in emergencies" :key="item.id" style="border-bottom: #999999 1px solid">
+              <tr v-for="(item, index) in emergencies" :key="item.id" style="border-bottom: #999999 1px solid">
                 <td class="bodyRow">{{ item.titulo }}</td>
-                <td class="bodyRow">{{ item.nombre }}</td>
-                <td class="bodyRow">{{ item.edad }}</td>
-                <td class="bodyRowDetail" @click="openModal(item.titulo)">Ver detalles</td>
+                <td class="bodyRow">{{ item.ubicacion }}</td>
+                <td class="bodyRowDetail" @click="openModal(item.idEmergencia, index)">Ver detalles</td>
               </tr>
             </tbody>
           </table>
@@ -106,7 +93,15 @@ export default {
     <div class="overlay" v-if="modal" @click="closeModal"></div>
     <div class="modal" v-if="modal">
       <div class="modalContent">
-        Hola carlitos
+        <h1>{{actualData.titulo}}</h1>
+        <div style="display: flex">
+          <p>Estado actual emergencia:</p>
+          <p>&nbsp;finalizada</p>
+        </div>
+        <div style="display: flex">
+          <p>Número de voluntarios:</p>
+          <p>&nbsp;{{actualEmergency.numeroVoluntariosPorEmergencia}}</p>
+        </div>
       </div>
     </div>
 

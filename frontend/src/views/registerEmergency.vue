@@ -24,8 +24,8 @@ export default {
   methods: {
     async submitForm() {
       const auxObject = {
-          id: generarNumeroAleatorio(),
-          idInstitucion: null,
+          id_emergencia: generarNumeroAleatorio(),
+          id_institucion: 2,
           tipo: this.tipo,
           ubicacion: this.ubicacion,
           equipamiento_necesario: this.equipamiento_necesario,
