@@ -2,11 +2,13 @@ package com.chileayuda.voluntariadobackend.Repositories;
 
 import com.chileayuda.voluntariadobackend.Models.Emergencia;
 import com.chileayuda.voluntariadobackend.Models.Estado_Tarea;
+import com.chileayuda.voluntariadobackend.Services.EmergenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
 import java.util.List;
 @Repository
 public class Info_Emergencia implements Info_EmergenciaRepository {
@@ -36,7 +38,7 @@ public class Info_Emergencia implements Info_EmergenciaRepository {
             int tareasCompletadas = con.createQuery("SELECT COUNT(*) FROM Tarea WHERE id_emergencia = :idEmergencia " +
                             "AND id_estado_tarea = :idEstadoCompletado")
                     .addParameter("idEmergencia", idEmergencia)
-                    .addParameter("idEstadoCompletado", id) // Reemplaza con el ID del estado "completado"
+                    .addParameter("idEstadoCompletado", id)
                     .executeScalar(Integer.class);
 
             if (tareasCompletadas == totalTareas) {
@@ -46,8 +48,6 @@ public class Info_Emergencia implements Info_EmergenciaRepository {
             }
         }
     }
-
-
 
 
     public int obtenerNumeroVoluntariosPorEmergencia(Integer idEmergencia) {
@@ -61,4 +61,39 @@ public class Info_Emergencia implements Info_EmergenciaRepository {
         }
     }
 
+
+    public List<Emergencia> obtenerEmergenciasCompletadas() {
+        try (Connection con = sql2o.open()) {
+            List<Emergencia> emergenciasCompletadas = new ArrayList<>();
+
+            // Obtener todas las emergencias desde la base de datos
+            List<Emergencia> todasLasEmergencias = con.createQuery("SELECT * FROM Emergencia")
+                    .executeAndFetch(Emergencia.class);
+
+            for (Emergencia emergencia : todasLasEmergencias) {
+                int totalTareas = con.createQuery("SELECT COUNT(*) FROM Tarea WHERE id_emergencia = :idEmergencia")
+                        .addParameter("idEmergencia", emergencia.getIdEmergencia())
+                        .executeScalar(Integer.class);
+
+                int tareasCompletadas = con.createQuery("SELECT COUNT(*) FROM Tarea WHERE id_emergencia = :idEmergencia " +
+                                "AND id_estado_tarea = :idEstadoCompletado")
+                        .addParameter("idEmergencia", emergencia.getIdEmergencia())
+                        .addParameter("idEstadoCompletado", 1)
+                        .executeScalar(Integer.class);
+
+                if (tareasCompletadas == totalTareas) {
+                    emergenciasCompletadas.add(emergencia);
+                }
+            }
+
+            return emergenciasCompletadas;
+        }
+    }
+
+
+
+
+
+
 }
+

@@ -3,10 +3,7 @@ package com.chileayuda.voluntariadobackend.Services;
 import com.chileayuda.voluntariadobackend.Models.Emergencia;
 import com.chileayuda.voluntariadobackend.Models.Estado_Tarea;
 import com.chileayuda.voluntariadobackend.Repositories.Info_EmergenciaRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -32,6 +29,9 @@ public class Info_EmergenciaService {
                 "numeroVoluntariosPorEmergencia", numeroVoluntariosPorEmergencia
         );
     }
-
+    @GetMapping("/completadas")
+    public List<Emergencia> obtenerEmergenciasCompletadas() {
+        return emergenciaService.obtenerEmergenciasCompletadas();
+    }
 
 }

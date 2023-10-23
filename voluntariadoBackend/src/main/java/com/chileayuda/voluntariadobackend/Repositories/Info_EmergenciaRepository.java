@@ -10,4 +10,7 @@ public interface Info_EmergenciaRepository {
     List<Emergencia> obtenerDetallesEmergencia();
     String obtenerEstadoActualEmergencia(Integer idEmergencia);
     int obtenerNumeroVoluntariosPorEmergencia(Integer idEmergencia);
+
+    List<Emergencia> obtenerEmergenciasCompletadas();
+
 }
