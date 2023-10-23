@@ -28,21 +28,9 @@ export default {
           alert("error en conectar al servidor")
         }
     },
-    async getTareas(){
-      try {
-        const res = await axios(import.meta.env.VITE_BASE_URL + `/tarea`)
-        this.tasks = res.data;
-        } catch (error){
-          alert("error en conectar al servidor")
-        }
-    },
     // HAY QUE PASARLE EL ID EMERGENCIA, PERO AHORA LE ESTOY PASANDO EL TITULO PARA PROBAR
     async openModal(idEmergencia, index) {
       const apiUrl = import.meta.env.VITE_BASE_URL + `/informacionEmergencia?idEmergencia=${idEmergencia}`
-      console.log("entra")
-      
-      
-      console.log(this.actualData);
       try {
         const res = await axios(apiUrl);
         this.actualEmergency = res.data;

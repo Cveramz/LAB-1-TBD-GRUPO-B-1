@@ -37,16 +37,15 @@ export default {
         }
     },
     // HAY QUE PASARLE EL ID EMERGENCIA, PERO AHORA LE ESTOY PASANDO EL TITULO PARA PROBAR
-    async openModal(idEmergencia) {
-      const apiUrl = import.meta.env.VITE_BASE_URL + `/emergencia/${idEmergencia}`
-      console.log(apiUrl);
+    async openModal(idEmergencia, index) {
+      const apiUrl = import.meta.env.VITE_BASE_URL + `/informacionEmergencia?idEmergencia=${idEmergencia}`
       try {
         const res = await axios(apiUrl);
         this.actualEmergency = res.data;
+        this.actualData = this.emergencies[index];
         this.modal = !this.modal;
       } catch (error){
         alert("error en conectar al servidor")
-        this.actualEmergency = ["prueba"];
         this.modal = !this.modal;
       }
     },
@@ -230,7 +229,7 @@ h2 {
   background-color: #fafafa;
   border-radius: 10px;
   width: 100%;
-  max-width: 300px;
+  max-width: 500px;
   height: 100%;
   max-height: 200px;
   z-index: 2;
