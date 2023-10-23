@@ -11,10 +11,11 @@ export default {
     return {
       tipo: "",
       descripcion: "",
-      emergencies: [{titulo: 2398, nombre: "aaa", edad: "aaaa"}],
+      emergencies: [],
       tasks: [],
       modal: false,
       actualEmergency: [],
+      actualData: [],
     }
   },
   
@@ -36,16 +37,19 @@ export default {
         }
     },
     // HAY QUE PASARLE EL ID EMERGENCIA, PERO AHORA LE ESTOY PASANDO EL TITULO PARA PROBAR
-    async openModal(idEmergencia) {
-      const apiUrl = import.meta.env.VITE_BASE_URL + `/emergencia/${idEmergencia}`
-      console.log(apiUrl);
+    async openModal(idEmergencia, index) {
+      const apiUrl = import.meta.env.VITE_BASE_URL + `/informacionEmergencia?idEmergencia=${idEmergencia}`
+      console.log("entra")
+      
+      
+      console.log(this.actualData);
       try {
         const res = await axios(apiUrl);
         this.actualEmergency = res.data;
+        this.actualData = this.emergencies[index];
         this.modal = !this.modal;
       } catch (error){
         alert("error en conectar al servidor")
-        this.actualEmergency = ["prueba"];
         this.modal = !this.modal;
       }
     },
@@ -66,8 +70,8 @@ export default {
   <SideBar />
   <div class="view">
     <div class="content">
-      <h1>Emergencias Finalizadas</h1>
-      <p>A continuación, se presenta un historial de las emergencias finalizadas
+      <h1>Todas las emergencias</h1>
+      <p>A continuación, se presentan todas las emergencias
       </p>
       <div class="card" style="margin-top: 20px;">
         <div v-if="emergencies.length !== 0"> 
@@ -78,10 +82,7 @@ export default {
                   Nombre Emergencia
                 </th>
                 <th class="tableRow">
-                  Tareas totales
-                </th>
-                <th class="tableRow">
-                  Voluntarios participantes
+                  Ubicación
                 </th>
                 <th class="tableRow">
                   detalles
@@ -89,11 +90,10 @@ export default {
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in emergencies" :key="item.id" style="border-bottom: #999999 1px solid">
+              <tr v-for="(item, index) in emergencies" :key="item.id" style="border-bottom: #999999 1px solid">
                 <td class="bodyRow">{{ item.titulo }}</td>
-                <td class="bodyRow">{{ item.nombre }}</td>
-                <td class="bodyRow">{{ item.edad }}</td>
-                <td class="bodyRowDetail" @click="openModal(item.titulo)">Ver detalles</td>
+                <td class="bodyRow">{{ item.ubicacion }}</td>
+                <td class="bodyRowDetail" @click="openModal(item.idEmergencia, index)">Ver detalles</td>
               </tr>
             </tbody>
           </table>
@@ -106,7 +106,15 @@ export default {
     <div class="overlay" v-if="modal" @click="closeModal"></div>
     <div class="modal" v-if="modal">
       <div class="modalContent">
-        Hola carlitos
+        <h1>{{actualData.titulo}}</h1>
+        <div style="display: flex">
+          <p>Estado actual emergencia:</p>
+          <p>&nbsp;{{actualEmergency.estadoActualEmergencia}}</p>
+        </div>
+        <div style="display: flex">
+          <p>Número de voluntarios:</p>
+          <p>&nbsp;{{actualEmergency.numeroVoluntariosPorEmergencia}}</p>
+        </div>
       </div>
     </div>
 
@@ -229,14 +237,16 @@ h2 {
   background-color: #fafafa;
   border-radius: 10px;
   width: 100%;
-  max-width: 300px;
+  max-width: 500px;
   height: 100%;
   max-height: 200px;
+  padding: 30px;
   z-index: 2;
 }
 
 .modalContent{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
